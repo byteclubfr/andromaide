@@ -2,7 +2,7 @@
 
 import React, { Component } from "react";
 
-export default class Buttons extends Component {
+export default class StepButtons extends Component {
 	handleThen1 () {
 		this.props.actions.addThen1();
 	}

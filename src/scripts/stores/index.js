@@ -1,3 +1,6 @@
 "use strict";
 
-export { default as steps } from "./steps";
+import source from "./source";
+import steps from "./steps";
+
+export default { source, steps };

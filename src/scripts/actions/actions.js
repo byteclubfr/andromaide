@@ -30,3 +30,15 @@ export function removeStep (index) {
 		index: index
 	};
 }
+
+export function resolve () {
+	return {
+		type: types.RESOLVE
+	}
+}
+
+export function reject () {
+	return {
+		type: types.REJECT
+	}
+}

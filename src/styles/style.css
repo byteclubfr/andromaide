@@ -12,13 +12,18 @@ body {
 
 button {
 	background: #ddd;
-	border: 0;
+	border: 1px solid #999;
 	cursor: pointer;
 	padding: 0.5em;
 }
 
 button:hover {
 	background: #ccc;
+}
+
+button:disabled {
+	color: #999;
+	cursor: not-allowed;
 }
 
 textarea {
@@ -61,23 +66,26 @@ textarea {
 	margin-left: 50%;
 }
 
-.on-success {
+/* green */
+.fulfilled,
+.resolve,
+.on-success,
+.add-then1 {
 	color: #090;
 }
 
-.on-error {
+/* red */
+.rejected,
+.reject,
+.on-error,
+.add-catch {
 	color: #900;
 }
 
 /* buttons */
 
-.buttons {
-	border: 1px solid #ccc;
-	display: flex;
-}
-
+.resolve,
 .add-then1 {
-	color: #090;
 	width: 50%;
 }
 
@@ -85,7 +93,7 @@ textarea {
 	width: 100%;
 }
 
+.reject,
 .add-catch {
-	color: #900;
 	width: 50%;
 }

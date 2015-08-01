@@ -3,6 +3,11 @@
  - Better debug: typos will get undefined
  */
 
+// source
+export const RESOLVE = "RESOLVE";
+export const REJECT = "REJECT";
+
+// steps
 export const ADD_CATCH = "ADD_CATCH";
 export const ADD_ON_ERROR = "ADD_ON_ERROR";
 export const ADD_ON_SUCCESS = "ADD_ON_SUCCESS";

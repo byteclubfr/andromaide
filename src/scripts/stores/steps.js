@@ -21,6 +21,7 @@ export default function steps (state = initialState, action) {
 				cbs: action.cbs
 			}
 		];
+
 	case REMOVE_STEP:
 		return state.filter((step, index) => index !== action.index);
 
