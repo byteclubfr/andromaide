@@ -1,0 +1,91 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+	background: white;
+	color: #333;
+	font-family: sans-serif;
+	margin: 0 auto;
+	width: 60%;
+}
+
+button {
+	background: #ddd;
+	border: 0;
+	cursor: pointer;
+	padding: 0.5em;
+}
+
+button:hover {
+	background: #ccc;
+}
+
+textarea {
+	display: block;
+	height: 4em;
+	width: 100%;
+}
+
+.steps {
+	list-style: none;
+	padding: 0;
+}
+
+.step {
+	margin: 1em 0;
+}
+
+.step:hover {
+	background: #eee;
+}
+
+.step-remove {
+	float: right;
+}
+
+.step-title {
+	color: #666;
+	text-align: right;
+}
+
+.step-cbs {
+	display: flex;
+}
+
+.step-cb {
+	width: 50%;
+}
+
+.step-catch .step-cb {
+	margin-left: 50%;
+}
+
+.on-success {
+	color: #090;
+}
+
+.on-error {
+	color: #900;
+}
+
+/* buttons */
+
+.buttons {
+	border: 1px solid #ccc;
+	display: flex;
+}
+
+.add-then1 {
+	color: #090;
+	width: 50%;
+}
+
+.add-then2 {
+	width: 100%;
+}
+
+.add-catch {
+	color: #900;
+	width: 50%;
+}

@@ -1,0 +1,23 @@
+{
+  "name": "andromaide",
+  "version": "1.0.0",
+  "description": "GUI to play with chained steps (Promises...)",
+  "main": "bundle.js",
+  "scripts": {
+    "html": "cp src/index.html dist",
+    "styles": "cp src/styles/style.css dist",
+    "components": "browserify src/scripts/index.js --debug -t [babelify --stage 0] --outfile dist/bundle.js",
+    "build": "mkdir -p dist && npm run components && npm run styles && npm run html",
+    "start": "http-server dist"
+  },
+  "author": "Delapouite <delapouite@gmail.com> (http://delapouite.com)",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^0.13.3",
+    "redux": "^0.12.0"
+  },
+  "devDependencies": {
+    "babelify": "^6.1.3",
+    "browserify": "^11.0.1"
+  }
+}
