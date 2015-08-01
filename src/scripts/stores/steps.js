@@ -4,7 +4,7 @@ const initialState = [
 	{
 		method: "then",
 		cbs: [
-			"success"
+			{ type: "success", body: "return data" }
 		]
 	}
 ];

@@ -7,7 +7,9 @@ class StepsCbs extends Component {
 		const { cbs } = this.props;
 		return (
 			<div className="step-cbs">
-				{cbs.map(cb => cb === "error" ? <ErrorCb key="error" /> : <SuccessCb key="success" />)}
+				{cbs.map(cb => cb.type === "error"
+						? <ErrorCb key="error" body={cb.body} />
+						: <SuccessCb key="success" body={cb.body} />)}
 			</div>
 		);
 	}
@@ -18,7 +20,7 @@ class SuccessCb extends Component {
 		return (
 			<div className="step-cb on-success">
 				function onSuccess (data) &#123;
-					<textarea />
+					<textarea>{this.props.body}</textarea>
 				&#125;
 			</div>
 		);
@@ -30,7 +32,7 @@ class ErrorCb extends Component {
 		return (
 			<div className="step-cb on-error">
 				function onError (err) &#123;
-					<textarea />
+					<textarea>{this.props.body}</textarea>
 				&#125;
 			</div>
 		);
