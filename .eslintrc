@@ -5,6 +5,7 @@
 	],
 	"env": {
 		"browser": true,
+		"es6": true,
 		"node": true
 	},
 	"ecmaFeatures": {
@@ -19,6 +20,7 @@
 		"spread": true
 	},
 	"rules": {
+		"space-before-function-paren": [1, "always"],
 		"react/jsx-no-undef": 2,
 		"react/jsx-uses-react": 1,
 		"react/jsx-uses-vars": 1,
