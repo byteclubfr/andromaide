@@ -2,6 +2,8 @@
  - Consistent naming in one place
  - Better debug: typos will get undefined
  */
+// options
+export const TOGGLE_INTERMEDIATE_PROMISES = "TOGGLE_INTERMEDIATE_PROMISES";
 
 // source
 export const RESOLVE = "RESOLVE";

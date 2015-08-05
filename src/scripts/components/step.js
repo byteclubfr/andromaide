@@ -2,6 +2,21 @@
 
 import React, { Component } from "react";
 
+// then, catch
+class Method extends Component {
+	render () {
+		const { method, index, intermediatePromises } = this.props;
+		const previousIndex = index === 0 ? "Source" : index - 1;
+		const assign = intermediatePromises
+			? `var promise${index} = promise${previousIndex}`
+			: "";
+
+		return (
+			<div className="step-method">{assign}.{method}(</div>
+		);
+	}
+}
+
 class StepsCbs extends Component {
 	render () {
 		const { cbs } = this.props;
@@ -55,14 +70,13 @@ export default class Step extends Component {
 		this.props.removeStep(this.props.index);
 	}
 	render() {
-		const { step, index } = this.props;
-		const { method, cbs } = step;
+		const { step: { method, cbs }, ui, index } = this.props;
 
 		return (
 				<li className={"step step-" + method}>
 					<button className="step-remove" onClick={::this.handleRemove} title="Remove this step">×</button>
 					<div className="step-title">Step {index}</div>
-					<div>.{method}(</div>
+					<Method method={method} index={index} intermediatePromises={ui.intermediatePromises} />
 					<StepsCbs cbs={cbs} />
 					<div>)</div>
 				</li>

@@ -10,7 +10,7 @@ import * as stores from "../stores";
 const redux = createRedux(stores);
 
 export default class App extends Component {
-	render() {
+	render () {
 		return (
 			<Provider redux={redux}>
 				{() => <StepsApp />}

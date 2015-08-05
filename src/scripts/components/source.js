@@ -20,7 +20,7 @@ class SourceButtons extends Component {
 }
 
 export default class Source extends Component {
-	render() {
+	render () {
 		const { source, actions } = this.props;
 
 		return (
