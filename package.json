@@ -4,11 +4,12 @@
   "description": "GUI to play with chained steps (Promises...)",
   "main": "bundle.js",
   "scripts": {
-    "html": "cp src/index.html dist",
-    "styles": "cp src/styles/style.css dist",
-    "components": "browserify src/scripts/index.js --debug -t [babelify --stage 0] --outfile dist/bundle.js",
     "build": "mkdir -p dist && npm run components && npm run styles && npm run html",
-    "start": "http-server dist"
+    "components": "browserify src/scripts/index.js --debug -t [babelify --stage 0] --outfile dist/bundle.js",
+    "html": "cp src/index.html dist",
+    "start": "http-server dist",
+    "styles": "stylus src/styles/style.styl --out dist/",
+    "w-styles": "stylus -w src/styles/styles.styl --out dist/"
   },
   "author": "Delapouite <delapouite@gmail.com> (http://delapouite.com)",
   "license": "ISC",
@@ -18,6 +19,7 @@
   },
   "devDependencies": {
     "babelify": "^6.1.3",
-    "browserify": "^11.0.1"
+    "browserify": "^11.0.1",
+    "stylus": "^0.52.0"
   }
 }
