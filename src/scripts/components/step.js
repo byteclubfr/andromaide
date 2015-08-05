@@ -1,15 +1,23 @@
 "use strict";
 
 import React, { Component } from "react";
+import PromiseId from "./promise-id";
 
 // then, catch
 class Method extends Component {
 	render () {
 		const { method, index, intermediatePromises } = this.props;
 		const previousIndex = index === 0 ? "Source" : index - 1;
-		const assign = intermediatePromises
-			? `var promise${index} = promise${previousIndex}`
-			: "";
+
+		var assign = "";
+		if (intermediatePromises) {
+			assign = [
+				<span>var </span>,
+				<PromiseId id={index} promiseState="pending" />,
+				<span> = </span>,
+				<PromiseId id={previousIndex} promiseState="pending" />
+			];
+		}
 
 		return (
 			<div className="step-method">{assign}.<strong>{method}</strong>(</div>

@@ -1,6 +1,7 @@
 "use strict";
 
 import React, { Component } from "react";
+import PromiseId from "./promise-id";
 
 class SourceButtons extends Component {
 	handleResolve () {
@@ -22,14 +23,9 @@ class SourceButtons extends Component {
 export default class Source extends Component {
 	render () {
 		const { source, ui, actions } = this.props;
-		var promise;
+		var assign;
 
 		// snippets
-		if (ui.intermediatePromises) {
-			promise = "var promiseSource = new Promise(executor);";
-		} else {
-			promise = "(new Promise(executor))";
-		}
 		const shortSnippet = ``;
 		const longSnippet =
 `
@@ -43,9 +39,18 @@ function executor (resolve, reject) {
 		}
 	});
 }
-${promise}
 `;
 		const snippet = true ? longSnippet : shortSnippet;
+
+		if (ui.intermediatePromises) {
+			assign = [
+				<span>var </span>,
+				<PromiseId id="Source" promiseState={source.promiseState} />,
+				<span> = new Promise(executor);</span>
+			];
+		} else {
+			assign = "(new Promise(executor))";
+		}
 
 		return (
 				<div className="source">
@@ -53,6 +58,7 @@ ${promise}
 					<span className={source.promiseState}>State: { source.promiseState }</span>
 					<span>Value: "{source.value}"</span>
 					<pre>{snippet}</pre>
+					<div>{assign}</div>
 					<SourceButtons {...actions} disabled={source.promiseState !== "pending"} />
 				</div>
 		);
