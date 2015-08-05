@@ -5,6 +5,7 @@ import React, { Component } from "react";
 class StepsCbs extends Component {
 	render () {
 		const { cbs } = this.props;
+
 		return (
 			<div className="step-cbs">
 				{cbs.map(cb => cb.type === "error"
@@ -16,11 +17,16 @@ class StepsCbs extends Component {
 }
 
 class SuccessCb extends Component {
+	handleChange(event) {
+
+	}
 	render () {
+		const { body } = this.props;
+
 		return (
 			<div className="step-cb on-success">
 				function onSuccess (data) &#123;
-					<textarea>{this.props.body}</textarea>
+					<textarea value={body} onChange={::this.handleChange}></textarea>
 				&#125;
 			</div>
 		);
@@ -28,11 +34,16 @@ class SuccessCb extends Component {
 }
 
 class ErrorCb extends Component {
+	handleChange(event) {
+
+	}
 	render () {
+		const { body } = this.props;
+
 		return (
 			<div className="step-cb on-error">
 				function onError (err) &#123;
-					<textarea>{this.props.body}</textarea>
+					<textarea value={body} onChange={::this.handleChange}></textarea>
 				&#125;
 			</div>
 		);
