@@ -12,7 +12,7 @@ class Method extends Component {
 			: "";
 
 		return (
-			<div className="step-method">{assign}.{method}(</div>
+			<div className="step-method">{assign}.<strong>{method}</strong>(</div>
 		);
 	}
 }
@@ -78,7 +78,7 @@ export default class Step extends Component {
 					<div className="step-title">Step {index}</div>
 					<Method method={method} index={index} intermediatePromises={ui.intermediatePromises} />
 					<StepsCbs cbs={cbs} />
-					<div>)</div>
+					<div>){ui.intermediatePromises ? ";" : ""}</div>
 				</li>
 		);
 	}

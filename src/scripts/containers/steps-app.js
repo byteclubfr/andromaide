@@ -25,7 +25,7 @@ export default class StepsApp extends Component {
 		return (
 			<div>
 				<Options ui={ui} actions={actions} />
-				<Source source={source} actions={actions} />
+				<Source source={source} ui={ui} actions={actions} />
 				<Steps steps={steps} ui={ui} actions={actions} />
 				<StepButtons actions={actions} />
 			</div>
