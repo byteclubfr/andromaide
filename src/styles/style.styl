@@ -1,3 +1,14 @@
+// colors
+
+lightPending = #feefb3;
+darkPending = #9f6000;
+
+lightSuccess = #dff2bf;
+darkSuccess = #4f8a10;
+
+lightError = #ffbaba;
+darkError = #d8000c;
+
 * {
 	box-sizing: border-box;
 }
@@ -75,20 +86,23 @@ textarea {
 	margin-left: 50%;
 }
 
-/* green */
+.pending {
+  background: lightPending;
+  color: darkPending;
+}
+
 .fulfilled,
 .resolve,
 .on-success,
 .add-then1 {
-	color: #090;
+	color: darkSuccess;
 }
 
-/* red */
 .rejected,
 .reject,
 .on-error,
 .add-catch {
-	color: #900;
+	color: darkError;
 }
 
 /* buttons */
