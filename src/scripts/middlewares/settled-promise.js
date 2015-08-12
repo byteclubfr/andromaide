@@ -26,6 +26,11 @@ export default store => next => action => {
 	}
 
 	function makeNextAction (data) {
+		var nextP = createNextPromise(data);
+		nextP.then(
+			result => store.dispatch(fulfill(result, action.stepIndex + 1, nextP)),
+			error => store.dispatch(reject(error, action.stepIndex + 1, nextP))
+		);
 		if (data.result) {
 			return fulfill(data.result, action.stepIndex + 1, createNextPromise(data));
 		}
@@ -41,11 +46,11 @@ export default store => next => action => {
 	return action.promise.then(
 		result => {
 			next(makeAction(true, { result }));
-			if (!isLastStep()) store.dispatch(makeNextAction({ result }));
+			if (!isLastStep()) makeNextAction({ result });
 		},
 		error => {
 			next(makeAction(true, { error }));
-			if (!isLastStep()) store.dispatch(makeNextAction({ error }));
+			if (!isLastStep()) makeNextAction({ error });
 		}
 	);
 };
