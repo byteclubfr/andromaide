@@ -3,6 +3,19 @@
 import React, { Component } from "react";
 import PromiseId from "./promise-id";
 
+class Arrows extends Component {
+	render () {
+		const { upStepPromiseState } = this.props;
+
+		return (
+			<div className="step-arrows">
+				<div className="step-arrow fulfilled">{ upStepPromiseState === "fulfilled" ? "⬇" : ""}</div>
+				<div className="step-arrow rejected">{ upStepPromiseState === "rejected" ? "⬇" : ""}</div>
+			</div>
+	);
+	}
+}
+
 // then, catch
 class Method extends Component {
 	render () {
@@ -25,7 +38,8 @@ class Method extends Component {
 	}
 }
 
-class StepsCbs extends Component {
+// Cbs = Callbacks
+class Cbs extends Component {
 	render () {
 		const { cbs, actions, index } = this.props;
 
@@ -82,10 +96,11 @@ export default class Step extends Component {
 
 		return (
 				<li className={"step step-" + method}>
+					<Arrows upStepPromiseState={upStep.promise.state} />
 					<button className="step-remove" onClick={::this.handleRemove} title="Remove this step">×</button>
 					<div className="step-title">Step {index}</div>
 					<Method method={method} index={index} promise={promise} upStepPromiseState={upStep.promise.state} intermediatePromises={ui.intermediatePromises} />
-					<StepsCbs index={index} cbs={cbs} actions={actions} />
+					<Cbs index={index} cbs={cbs} actions={actions} />
 					<div>){ui.intermediatePromises ? ";" : ""}</div>
 				</li>
 		);
