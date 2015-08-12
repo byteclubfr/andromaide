@@ -1,18 +1,22 @@
 "use strict";
 
+// React needs to be included for JSX desuggaring
 import React, { Component } from "react";
-import { createRedux } from "redux";
-import { Provider } from "redux/react";
+import { createStore, combineReducers } from "redux";
+import { Provider } from "react-redux";
 
 import StepsApp from "./steps-app";
-import * as stores from "../stores";
+import * as reducers from "../reducers";
 
-const redux = createRedux(stores);
+const reducer = combineReducers(reducers);
+const store = createStore(reducer);
 
 export default class App extends Component {
 	render () {
+		// anonymous fn because of how context works in react 0.13
+		// <Provider> makes the store available to the connect() calls in the comp hierarchy below
 		return (
-			<Provider redux={redux}>
+			<Provider store={store}>
 				{() => <StepsApp />}
 			</Provider>
 		);

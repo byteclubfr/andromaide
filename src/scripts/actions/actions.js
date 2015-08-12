@@ -10,15 +10,19 @@ export function toggleIntermediatePromises () {
 
 // source
 
-export function resolve () {
+export function resolve (value, stepIndex) {
 	return {
-		type: types.RESOLVE
+		type: types.RESOLVE,
+		value,
+		stepIndex
 	}
 }
 
-export function reject () {
+export function reject (value, stepIndex) {
 	return {
-		type: types.REJECT
+		type: types.REJECT,
+		value,
+		stepIndex
 	}
 }
 

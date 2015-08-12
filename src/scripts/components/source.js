@@ -5,16 +5,18 @@ import PromiseId from "./promise-id";
 
 class SourceButtons extends Component {
 	handleResolve () {
-		this.props.resolve();
+		this.props.resolve(this.props.initValue, 0);
 	}
 	handleReject () {
-		this.props.reject();
+		this.props.reject(this.props.initValue, 0);
 	}
 	render () {
+		const { disabled } = this.props;
+
 		return (
 			<div>
-				<button className="resolve" onClick={::this.handleResolve} disabled={this.props.disabled}>Resolve</button>
-				<button className="reject" onClick={::this.handleReject} disabled={this.props.disabled}>Reject</button>
+				<button className="resolve" onClick={::this.handleResolve} disabled={disabled}>Resolve</button>
+				<button className="reject" onClick={::this.handleReject} disabled={disabled}>Reject</button>
 			</div>
 		);
 	}
@@ -22,14 +24,14 @@ class SourceButtons extends Component {
 
 export default class Source extends Component {
 	render () {
-		const { source, ui, actions } = this.props;
+		const { step, ui, actions } = this.props;
 		var assign;
 
 		// snippets
 		const shortSnippet = ``;
 		const longSnippet =
 `
-var value = "${source.value}";
+var value = "${step.initValue}";
 function executor (resolve, reject) {
 	buttons.onclick = _.once(function (event) {
 		if (event.target.textConent === 'Resolve') {
@@ -45,7 +47,7 @@ function executor (resolve, reject) {
 		if (ui.intermediatePromises) {
 			assign = [
 				<span>var </span>,
-				<PromiseId id="Source" promiseState={source.promiseState} />,
+				<PromiseId id="Source" promiseState={step.promise.state} />,
 				<span> = new Promise(executor);</span>
 			];
 		} else {
@@ -55,11 +57,11 @@ function executor (resolve, reject) {
 		return (
 				<div className="source">
 					<strong>Source promise</strong>
-					<span className={source.promiseState}>State: { source.promiseState }</span>
-					<span>Value: "{source.value}"</span>
+					<span className={step.promise.state}>State: {step.promise.state}</span>
+					<span>Value: "{step.initValue}"</span>
 					<pre>{snippet}</pre>
 					<div>{assign}</div>
-					<SourceButtons {...actions} disabled={source.promiseState !== "pending"} />
+					<SourceButtons {...actions} initValue={step.initValue} disabled={step.promise.state !== "pending"} />
 				</div>
 		);
 	}

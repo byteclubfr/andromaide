@@ -1,5 +1,6 @@
 "use strict";
 
+import { tail } from "lodash";
 import React, { Component } from "react";
 import Step from "./step";
 
@@ -7,9 +8,10 @@ export default class Steps extends Component {
 	render () {
 		const { steps, ui, actions } = this.props;
 
+		// upStep = upstreamStep
 		return (
 				<ul className="steps">
-					{steps.map((step, i) => <Step key={i} step={step} index={i} ui={ui} {...actions} />)}
+					{tail(steps).map((step, i) => <Step key={i + 1} step={step} upStep={steps[i]} index={i + 1} ui={ui} {...actions} />)}
 				</ul>
 		);
 	}

@@ -4,7 +4,7 @@ const initialState = {
 	intermediatePromises: true
 };
 
-export default function source (state = initialState, action) {
+export default function Ui (state = initialState, action) {
 	switch (action.type) {
 	case TOGGLE_INTERMEDIATE_PROMISES:
 		return { ...state, intermediatePromises: !state.intermediatePromises };
