@@ -31,15 +31,15 @@ class StepsCbs extends Component {
 
 		return (
 			<div className="step-cbs">
-				{cbs.map(cb => cb.type === "error"
-						? <ErrorCb key="error" body={cb.body} />
-						: <SuccessCb key="success" body={cb.body} />)}
+				{cbs.map(cb => cb.type === "fulfilled"
+						? <OnFulfilled key="fulfilled" body={cb.body} />
+						: <OnRejected key="rejected" body={cb.body} />)}
 			</div>
 		);
 	}
 }
 
-class SuccessCb extends Component {
+class OnFulfilled extends Component {
 	handleChange(event) {
 
 	}
@@ -47,8 +47,8 @@ class SuccessCb extends Component {
 		const { body } = this.props;
 
 		return (
-			<div className="step-cb on-success">
-				function onSuccess (data) &#123;
+			<div className="step-cb on-fulfilled">
+				function onFulfilled (data) &#123;
 					<textarea value={body} onChange={::this.handleChange}></textarea>
 				&#125;
 			</div>
@@ -56,7 +56,7 @@ class SuccessCb extends Component {
 	}
 }
 
-class ErrorCb extends Component {
+class OnRejected extends Component {
 	handleChange(event) {
 
 	}
@@ -64,8 +64,8 @@ class ErrorCb extends Component {
 		const { body } = this.props;
 
 		return (
-			<div className="step-cb on-error">
-				function onError (err) &#123;
+			<div className="step-cb on-rejected">
+				function onRejected (err) &#123;
 					<textarea value={body} onChange={::this.handleChange}></textarea>
 				&#125;
 			</div>

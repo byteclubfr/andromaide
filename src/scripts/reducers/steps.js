@@ -5,10 +5,7 @@ const initialState = [
 	{
 		initValue: "toto",
 		promise: {
-			state: "pending",
-			value: null,
-			// real promise instance
-			obj: null
+			state: "pending"
 		}
 	},
 	{
@@ -17,7 +14,7 @@ const initialState = [
 		},
 		method: "then",
 		cbs: [
-			{ type: "success", body: "return data" }
+			{ type: "fulfilled", body: "return data" }
 		]
 	}
 ];
@@ -30,7 +27,9 @@ export default function steps (state = initialState, action) {
 		return [
 			...state,
 			{
-				promise: {},
+				promise: {
+					state: "pending"
+				},
 				method: action.method,
 				cbs: action.cbs
 			}
@@ -76,7 +75,7 @@ export default function steps (state = initialState, action) {
 
 function buildCbsFns (cbs) {
 	return cbs.reduce(function (cb) {
-		var arg = cb.type === "success" ? "data" : "err";
+		var arg = cb.type === "fulfilled" ? "data" : "err";
 		return {
 			...cb,
 			fn: new Function(arg, cb.body)
@@ -86,8 +85,8 @@ function buildCbsFns (cbs) {
 
 function cbsToMap (cbs) {
 	return {
-		onSuccess: cbs.filter(cb => cb.type === "success")[0],
-		onError: cbs.filter(cb => cb.type === "error")[0]
+		onFulfilled: cbs.filter(cb => cb.type === "fulfilled")[0],
+		onRejected: cbs.filter(cb => cb.type === "rejected")[0]
 	};
 }
 
@@ -95,7 +94,7 @@ function buildChains (state) {
 	var promises = state.map(function (step, index) {
 		var cbs = buildCbsFns(step.cbs);
 		cbs = cbsToMap(cbs);
-		step.promise = state[index - 1].promise.then(cbs.onSuccess, cbs.onError);
+		step.promise = state[index - 1].promise.then(cbs.onFulfilled, cbs.onRejected);
 		return step.promise;
 	});
 

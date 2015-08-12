@@ -15,9 +15,9 @@ export default class StepButtons extends Component {
 	render () {
 		return (
 			<div>
-				<button className="add-then2" onClick={::this.handleThen2}>Add .then(onSuccess, onError)</button>
-				<button className="add-then1" onClick={::this.handleThen1}>Add .then(onSuccess)</button>
-				<button className="add-catch" onClick={::this.handleCatch}>Add .catch(onError)</button>
+				<button className="add-then2" onClick={::this.handleThen2}>Add .then(onFulfilled, onRejected)</button>
+				<button className="add-then1" onClick={::this.handleThen1}>Add .then(onFulfilled)</button>
+				<button className="add-catch" onClick={::this.handleCatch}>Add .catch(onRejected)</button>
 			</div>
 		);
 	}

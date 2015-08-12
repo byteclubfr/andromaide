@@ -33,7 +33,7 @@ export function addThen1 () {
 		type: types.ADD_THEN1,
 		method: "then",
 		cbs: [
-			{ type: "success", body: "return data;" }
+			{ type: "fulfilled", body: "return data;" }
 		]
 	}
 }
@@ -43,8 +43,8 @@ export function addThen2 () {
 		type: types.ADD_THEN2,
 		method: "then",
 		cbs: [
-			{ type: "success", body: "return data;" },
-			{ type: "error", body: "throw err;" }
+			{ type: "fulfilled", body: "return data;" },
+			{ type: "rejected", body: "throw err;" }
 		]
 	}
 }
@@ -54,7 +54,7 @@ export function addCatch () {
 		type: types.ADD_CATCH,
 		method: "catch",
 		cbs: [
-			{ type: "error", body: "throw err;" }
+			{ type: "rejected", body: "throw err;" }
 		]
 	}
 }
