@@ -10,9 +10,9 @@ export function toggleIntermediatePromises () {
 
 // source
 
-export function resolve (value, stepIndex) {
+export function fulfill (value, stepIndex) {
 	return {
-		type: types.RESOLVE,
+		type: types.FULFILL,
 		value,
 		stepIndex
 	}

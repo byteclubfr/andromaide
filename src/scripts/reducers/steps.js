@@ -1,4 +1,4 @@
-import { ADD_THEN1, ADD_THEN2, ADD_CATCH, REMOVE_STEP, RESOLVE, REJECT } from "../constants/action-types";
+import { ADD_THEN1, ADD_THEN2, ADD_CATCH, REMOVE_STEP, FULFILL, REJECT } from "../constants/action-types";
 
 const initialState = [
 	// 0 = source
@@ -38,7 +38,7 @@ export default function steps (state = initialState, action) {
 	case REMOVE_STEP:
 		return state.filter((step, index) => index !== action.index);
 
-	case RESOLVE:
+	case FULFILL:
 		return state.map(function (step, index) {
 			// source
 			if (index === action.stepIndex) {

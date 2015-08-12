@@ -7,7 +7,7 @@
 export const TOGGLE_INTERMEDIATE_PROMISES = "TOGGLE_INTERMEDIATE_PROMISES";
 
 // source buttons
-export const RESOLVE = "RESOLVE";
+export const FULFILL = "FULFILL";
 export const REJECT = "REJECT";
 
 // steps

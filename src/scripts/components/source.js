@@ -4,8 +4,8 @@ import React, { Component } from "react";
 import PromiseId from "./promise-id";
 
 class SourceButtons extends Component {
-	handleResolve () {
-		this.props.resolve(this.props.initValue, 0);
+	handleFulfill () {
+		this.props.fulfill(this.props.initValue, 0);
 	}
 	handleReject () {
 		this.props.reject(this.props.initValue, 0);
@@ -15,7 +15,7 @@ class SourceButtons extends Component {
 
 		return (
 			<div>
-				<button className="resolve" onClick={::this.handleResolve} disabled={disabled}>Resolve</button>
+				<button className="fulfill" onClick={::this.handleFulfill} disabled={disabled}>Fulfill</button>
 				<button className="reject" onClick={::this.handleReject} disabled={disabled}>Reject</button>
 			</div>
 		);
@@ -34,7 +34,7 @@ export default class Source extends Component {
 var value = "${step.initValue}";
 function executor (resolve, reject) {
 	buttons.onclick = _.once(function (event) {
-		if (event.target.textConent === 'Resolve') {
+		if (event.target.textContent === "Fulfill") {
 			resolve(value);
 		} else {
 			reject(value);
