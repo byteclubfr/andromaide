@@ -2,14 +2,22 @@
 
 // React needs to be included for JSX desuggaring
 import React, { Component } from "react";
-import { createStore, combineReducers } from "redux";
+import { createStore, combineReducers, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 
 import StepsApp from "./steps-app";
 import * as reducers from "../reducers";
 
+import logger from "../middlewares/logger";
+import settledPromise from "../middlewares/settled-promise";
+
+const createStoreWithMiddleware = applyMiddleware(
+	settledPromise,
+	logger
+)(createStore);
+
 const reducer = combineReducers(reducers);
-const store = createStore(reducer);
+const store = createStoreWithMiddleware(reducer);
 
 export default class App extends Component {
 	render () {

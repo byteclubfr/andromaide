@@ -1,4 +1,8 @@
-import { ADD_THEN1, ADD_THEN2, ADD_CATCH, REMOVE_STEP, FULFILL, REJECT } from "../constants/action-types";
+import {
+	ADD_THEN1, ADD_THEN2, ADD_CATCH, REMOVE_STEP,
+	FULFILL, REJECT,
+	CHANGE_ON_FULFILLED_BODY, CHANGE_ON_REJECTED_BODY
+} from "../constants/action-types";
 
 const initialState = [
 	// 0 = source
@@ -14,7 +18,7 @@ const initialState = [
 		},
 		method: "then",
 		cbs: [
-			{ type: "fulfilled", body: "return data" }
+			{ type: "fulfilled", body: "return data.toUpperCase()" }
 		]
 	}
 ];
@@ -39,6 +43,8 @@ export default function steps (state = initialState, action) {
 		return state.filter((step, index) => index !== action.index);
 
 	case FULFILL:
+		if (!action.settled) return state;
+
 		return state.map(function (step, index) {
 			// source
 			if (index === action.stepIndex) {
@@ -46,7 +52,7 @@ export default function steps (state = initialState, action) {
 					...step,
 					promise: {
 						state: "fulfilled",
-						value: action.value
+						value: action.data.result
 					}
 				};
 			}
@@ -54,6 +60,8 @@ export default function steps (state = initialState, action) {
 		});
 
 	case REJECT:
+		if (!action.settled) return state;
+
 		return state.map(function (step, index) {
 			// source
 			if (index === action.stepIndex) {
@@ -61,8 +69,36 @@ export default function steps (state = initialState, action) {
 					...step,
 					promise: {
 						state: "rejected",
-						value: action.value
+						value: action.data.error
 					}
+				};
+			}
+			return step;
+		});
+
+	case CHANGE_ON_FULFILLED_BODY:
+		return state.map(function (step, index) {
+			if (index === action.index) {
+				return {
+					...step,
+					cbs: step.cbs.map(cb => {
+							if (cb.type !== "fulfilled") return cb;
+							return { type: "fulfilled", body: action.body };
+					})
+				};
+			}
+			return step;
+		});
+
+	case CHANGE_ON_REJECTED_BODY:
+		return state.map(function (step, index) {
+			if (index === action.index) {
+				return {
+					...step,
+					cbs: step.cbs.map(cb => {
+							if (cb.type !== "rejected") return cb;
+							return { type: "rejected", body: action.body };
+					})
 				};
 			}
 			return step;
@@ -71,32 +107,4 @@ export default function steps (state = initialState, action) {
 	default:
 		return state;
 	}
-}
-
-function buildCbsFns (cbs) {
-	return cbs.reduce(function (cb) {
-		var arg = cb.type === "fulfilled" ? "data" : "err";
-		return {
-			...cb,
-			fn: new Function(arg, cb.body)
-		};
-	}, {});
-}
-
-function cbsToMap (cbs) {
-	return {
-		onFulfilled: cbs.filter(cb => cb.type === "fulfilled")[0],
-		onRejected: cbs.filter(cb => cb.type === "rejected")[0]
-	};
-}
-
-function buildChains (state) {
-	var promises = state.map(function (step, index) {
-		var cbs = buildCbsFns(step.cbs);
-		cbs = cbsToMap(cbs);
-		step.promise = state[index - 1].promise.then(cbs.onFulfilled, cbs.onRejected);
-		return step.promise;
-	});
-
-	return promises;
 }

@@ -11,7 +11,7 @@ export default class Steps extends Component {
 		// upStep = upstreamStep
 		return (
 				<ul className="steps">
-					{tail(steps).map((step, i) => <Step key={i + 1} step={step} upStep={steps[i]} index={i + 1} ui={ui} {...actions} />)}
+					{tail(steps).map((step, i) => <Step key={i + 1} step={step} upStep={steps[i]} index={i + 1} ui={ui} actions={actions} />)}
 				</ul>
 		);
 	}

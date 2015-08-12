@@ -6,14 +6,14 @@ import PromiseId from "./promise-id";
 // then, catch
 class Method extends Component {
 	render () {
-		const { method, index, upStepPromiseState, intermediatePromises } = this.props;
+		const { method, index, promise, upStepPromiseState, intermediatePromises } = this.props;
 		const upStateIndex = index === 1 ? "Source" : index - 1;
 
 		var assign = "";
 		if (intermediatePromises) {
 			assign = [
 				<span>var </span>,
-				<PromiseId id={index} promiseState="pending" />,
+				<PromiseId id={index} promiseState={promise.state} />,
 				<span> = </span>,
 				<PromiseId id={upStateIndex} promiseState={upStepPromiseState} />
 			];
@@ -27,13 +27,13 @@ class Method extends Component {
 
 class StepsCbs extends Component {
 	render () {
-		const { cbs } = this.props;
+		const { cbs, actions, index } = this.props;
 
 		return (
 			<div className="step-cbs">
 				{cbs.map(cb => cb.type === "fulfilled"
-						? <OnFulfilled key="fulfilled" body={cb.body} />
-						: <OnRejected key="rejected" body={cb.body} />)}
+						? <OnFulfilled key="fulfilled" body={cb.body} onChange={actions.changeOnFulfilledBody.bind(null, index)} />
+						: <OnRejected key="rejected" body={cb.body} onChange={actions.changeOnRejectedBody.bind(null, index)} />)}
 			</div>
 		);
 	}
@@ -41,7 +41,7 @@ class StepsCbs extends Component {
 
 class OnFulfilled extends Component {
 	handleChange(event) {
-
+		this.props.onChange(event.target.value);
 	}
 	render () {
 		const { body } = this.props;
@@ -58,7 +58,7 @@ class OnFulfilled extends Component {
 
 class OnRejected extends Component {
 	handleChange(event) {
-
+		this.props.onChange(event.target.value);
 	}
 	render () {
 		const { body } = this.props;
@@ -75,17 +75,17 @@ class OnRejected extends Component {
 
 export default class Step extends Component {
 	handleRemove () {
-		this.props.removeStep(this.props.index);
+		this.props.actions.removeStep(this.props.index);
 	}
 	render() {
-		const { step: { method, cbs }, upStep, ui, index } = this.props;
+		const { step: { method, cbs, promise }, upStep, ui, index, actions } = this.props;
 
 		return (
 				<li className={"step step-" + method}>
 					<button className="step-remove" onClick={::this.handleRemove} title="Remove this step">×</button>
 					<div className="step-title">Step {index}</div>
-					<Method method={method} index={index} upStepPromiseState={upStep.promise.state} intermediatePromises={ui.intermediatePromises} />
-					<StepsCbs cbs={cbs} />
+					<Method method={method} index={index} promise={promise} upStepPromiseState={upStep.promise.state} intermediatePromises={ui.intermediatePromises} />
+					<StepsCbs index={index} cbs={cbs} actions={actions} />
 					<div>){ui.intermediatePromises ? ";" : ""}</div>
 				</li>
 		);

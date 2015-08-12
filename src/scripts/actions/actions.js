@@ -1,6 +1,6 @@
-import * as types from '../constants/action-types';
+import * as types from "../constants/action-types";
 
-// options
+// ui options
 
 export function toggleIntermediatePromises () {
 	return {
@@ -10,18 +10,22 @@ export function toggleIntermediatePromises () {
 
 // source
 
-export function fulfill (value, stepIndex) {
+export function fulfill (value, stepIndex, promise) {
+	promise = promise || Promise.resolve(value);
+
 	return {
 		type: types.FULFILL,
-		value,
+		promise,
 		stepIndex
 	}
 }
 
-export function reject (value, stepIndex) {
+export function reject (value, stepIndex, promise) {
+	promise = promise || Promise.reject(value);
+
 	return {
 		type: types.REJECT,
-		value,
+		promise,
 		stepIndex
 	}
 }
@@ -66,3 +70,20 @@ export function removeStep (index) {
 	};
 }
 
+// steps cbs
+
+export function changeOnFulfilledBody (index, body) {
+	return {
+		type: types.CHANGE_ON_FULFILLED_BODY,
+		index,
+		body
+	}
+}
+
+export function changeOnRejectedBody (index, body) {
+	return {
+		type: types.CHANGE_ON_REJECTED_BODY,
+		index,
+		body
+	}
+}
