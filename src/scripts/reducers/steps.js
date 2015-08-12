@@ -18,7 +18,16 @@ const initialState = [
 		},
 		method: "then",
 		cbs: [
-			{ type: "fulfilled", body: "return data.toUpperCase()" }
+			{ type: "fulfilled", body: "return data.toUpperCase();" }
+		]
+	},
+	{
+		promise: {
+			state: "pending"
+		},
+		method: "catch",
+		cbs: [
+			{ type: "rejected", body: "throw err;" }
 		]
 	}
 ];
