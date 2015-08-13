@@ -1,6 +1,6 @@
 import {
 	ADD_THEN1, ADD_THEN2, ADD_CATCH, REMOVE_STEP,
-	FULFILL, REJECT,
+	CHANGE_INIT_VALUE, FULFILL, REJECT,
 	CHANGE_ON_FULFILLED_BODY, CHANGE_ON_REJECTED_BODY
 } from "../constants/action-types";
 
@@ -50,6 +50,18 @@ export default function steps (state = initialState, action) {
 
 	case REMOVE_STEP:
 		return state.filter((step, index) => index !== action.index);
+
+	case CHANGE_INIT_VALUE:
+		return state.map(function (step, index) {
+			// source
+			if (index === 0) {
+				return {
+					...step,
+					initValue: action.value
+				};
+			}
+			return step;
+		});
 
 	case FULFILL:
 		if (!action.settled) return state;

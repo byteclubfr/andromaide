@@ -8,7 +8,8 @@ export const TOGGLE_OPTIONS = "TOGGLE_OPTIONS";
 export const TOGGLE_EXECUTOR = "TOGGLE_EXECUTOR";
 export const TOGGLE_INTERMEDIATE_PROMISES = "TOGGLE_INTERMEDIATE_PROMISES";
 
-// source buttons
+// source
+export const CHANGE_INIT_VALUE = "CHANGE_INIT_VALUE";
 export const FULFILL = "FULFILL";
 export const REJECT = "REJECT";
 

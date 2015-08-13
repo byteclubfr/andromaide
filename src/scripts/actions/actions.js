@@ -22,6 +22,13 @@ export function toggleIntermediatePromises () {
 
 // source
 
+export function changeInitValue (value) {
+	return {
+		type: types.CHANGE_INIT_VALUE,
+		value
+	}
+}
+
 export function fulfill (value, stepIndex, promise) {
 	promise = promise || Promise.resolve(value);
 

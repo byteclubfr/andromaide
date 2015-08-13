@@ -24,6 +24,9 @@ class SourceButtons extends Component {
 }
 
 export default class Source extends Component {
+	handleChangeInitValue(event) {
+		this.props.actions.changeInitValue(event.target.value);
+	}
 	render () {
 		const { step, ui, actions } = this.props;
 		var assign;
@@ -32,13 +35,12 @@ export default class Source extends Component {
 		const shortSnippet = ``;
 		const longSnippet =
 `
-var value = "${step.initValue}";
 function executor (resolve, reject) {
 	buttons.onclick = _.once(function (event) {
 		if (event.target.textContent === "Fulfill") {
-			resolve(value);
+			resolve(initValue);
 		} else {
-			reject(value);
+			reject(initValue);
 		}
 	});
 }
@@ -57,9 +59,8 @@ function executor (resolve, reject) {
 
 		return (
 				<div className="source">
-					<strong>Source promise</strong>
-					<span className={step.promise.state}>State: {step.promise.state}</span>
-					<span>Value: "{step.initValue}"</span>
+					<div className="source-title">Source</div>
+					<div className="source-init-value">var initValue = <input value={step.initValue} onChange={::this.handleChangeInitValue} /></div>
 					<pre className={classNames("source-snippet", { hidden: !ui.executor })}>{snippet}</pre>
 					<div className="source-assign">{assign}</div>
 					<SourceButtons {...actions} initValue={step.initValue} disabled={step.promise.state !== "pending"} />
