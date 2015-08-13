@@ -10,9 +10,11 @@ const initialState = {
 	executor: false,
 	intermediatePromises: true,
 	cbsName: false,
+	fakeDelay: 0,
+
+	// Non persistent
 	// block certain part of the UI (buttons, textareas...)
-	settled: false,
-	fakeDelay: 0
+	settled: false
 };
 
 export default function Ui (state = initialState, action) {

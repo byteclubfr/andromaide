@@ -23,7 +23,8 @@
     "lodash": "^3.10.1",
     "react": "^0.13.3",
     "react-redux": "^0.8.2",
-    "redux": "^1.0.0-rc"
+    "redux": "^1.0.0-rc",
+    "redux-localstorage": "^0.4.0"
   },
   "devDependencies": {
     "babelify": "^6.1.3",
