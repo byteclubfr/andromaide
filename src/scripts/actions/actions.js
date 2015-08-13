@@ -8,12 +8,17 @@ export function toggleOptions () {
 	}
 }
 
+export function toggleExecutor () {
+	return {
+		type: types.TOGGLE_EXECUTOR
+	}
+}
+
 export function toggleIntermediatePromises () {
 	return {
 		type: types.TOGGLE_INTERMEDIATE_PROMISES
 	}
 }
-
 
 // source
 

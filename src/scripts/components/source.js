@@ -2,6 +2,7 @@
 
 import React, { Component } from "react";
 import PromiseId from "./promise-id";
+import classNames from "classnames";
 
 class SourceButtons extends Component {
 	handleFulfill () {
@@ -14,7 +15,7 @@ class SourceButtons extends Component {
 		const { disabled } = this.props;
 
 		return (
-			<div>
+			<div className="source-buttons">
 				<button className="fulfill" onClick={::this.handleFulfill} disabled={disabled}>Fulfill</button>
 				<button className="reject" onClick={::this.handleReject} disabled={disabled}>Reject</button>
 			</div>
@@ -59,8 +60,8 @@ function executor (resolve, reject) {
 					<strong>Source promise</strong>
 					<span className={step.promise.state}>State: {step.promise.state}</span>
 					<span>Value: "{step.initValue}"</span>
-					<pre>{snippet}</pre>
-					<div>{assign}</div>
+					<pre className={classNames("source-snippet", { hidden: !ui.executor })}>{snippet}</pre>
+					<div className="source-assign">{assign}</div>
 					<SourceButtons {...actions} initValue={step.initValue} disabled={step.promise.state !== "pending"} />
 				</div>
 		);

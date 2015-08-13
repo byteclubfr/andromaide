@@ -33,7 +33,7 @@ class Method extends Component {
 		}
 
 		return (
-			<div className="step-method">{assign}.<strong>{method}</strong>(</div>
+			<div className="step-method">{assign}<strong>.{method}(</strong></div>
 		);
 	}
 }
@@ -101,7 +101,7 @@ export default class Step extends Component {
 					<Arrows upStepPromiseState={upStep.promise.state} />
 					<Method method={method} index={index} promise={promise} upStepPromiseState={upStep.promise.state} intermediatePromises={ui.intermediatePromises} />
 					<Cbs index={index} cbs={cbs} actions={actions} />
-					<div>){ui.intermediatePromises ? ";" : ""}</div>
+					<div className="step-method-end"><strong>){ui.intermediatePromises ? ";" : ""}</strong></div>
 				</li>
 		);
 	}
