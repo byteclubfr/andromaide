@@ -2,11 +2,18 @@ import * as types from "../constants/action-types";
 
 // ui options
 
+export function toggleOptions () {
+	return {
+		type: types.TOGGLE_OPTIONS
+	}
+}
+
 export function toggleIntermediatePromises () {
 	return {
 		type: types.TOGGLE_INTERMEDIATE_PROMISES
 	}
 }
+
 
 // source
 

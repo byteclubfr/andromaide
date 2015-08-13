@@ -4,6 +4,7 @@
  */
 
 // ui options form
+export const TOGGLE_OPTIONS = "TOGGLE_OPTIONS";
 export const TOGGLE_INTERMEDIATE_PROMISES = "TOGGLE_INTERMEDIATE_PROMISES";
 
 // source buttons
