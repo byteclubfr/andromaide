@@ -37,6 +37,7 @@ class Cbs extends Component {
 				{cbs.map(cb => cb.type === "fulfilled"
 					? <OnFulfilled
 							key="fulfilled"
+							index={index}
 							body={cb.body}
 							onChange={actions.changeOnFulfilledBody.bind(null, index)}
 							disabled={ui.settled}
@@ -45,6 +46,7 @@ class Cbs extends Component {
 					: <OnRejected
 							key="rejected"
 							body={cb.body}
+							index={index}
 							onChange={actions.changeOnRejectedBody.bind(null, index)}
 							disabled={ui.settled}
 							notCalled={ui.settled && parentStepPromiseState === "fulfilled"}
@@ -60,11 +62,11 @@ class OnFulfilled extends Component {
 		this.props.onChange(event.target.value);
 	}
 	render () {
-		const { body, disabled, notCalled } = this.props;
+		const { body, disabled, index, notCalled } = this.props;
 
 		return (
 			<div className={classNames("step-cb", "on-fulfilled", { "not-called": notCalled })}>
-				function onFulfilled (data) &#123;
+				function onFulfilled{index} (data) &#123;
 					<textarea value={body} onChange={::this.handleChange} disabled={disabled}></textarea>
 				&#125;
 			</div>
@@ -77,11 +79,11 @@ class OnRejected extends Component {
 		this.props.onChange(event.target.value);
 	}
 	render () {
-		const { body, disabled, notCalled } = this.props;
+		const { body, disabled, index, notCalled } = this.props;
 
 		return (
 			<div className={classNames("step-cb", "on-rejected", { "not-called": notCalled })}>
-				function onRejected (err) &#123;
+				function onRejected{index} (err) &#123;
 					<textarea value={body} onChange={::this.handleChange} disabled={disabled}></textarea>
 				&#125;
 			</div>
