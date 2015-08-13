@@ -67,7 +67,6 @@ export default function steps (state = initialState, action) {
 		if (!action.settled) return state;
 
 		return state.map(function (step, index) {
-			// source
 			if (index === action.stepIndex) {
 				return {
 					...step,
@@ -77,6 +76,13 @@ export default function steps (state = initialState, action) {
 					}
 				};
 			}
+			// to ease diagonal arrows
+			if (index === action.stepIndex + 1) {
+				return {
+					...step,
+					parentStepPromiseState: "fulfilled"
+				}
+			}
 			return step;
 		});
 
@@ -84,7 +90,6 @@ export default function steps (state = initialState, action) {
 		if (!action.settled) return state;
 
 		return state.map(function (step, index) {
-			// source
 			if (index === action.stepIndex) {
 				return {
 					...step,
@@ -93,6 +98,13 @@ export default function steps (state = initialState, action) {
 						value: action.data.error
 					}
 				};
+			}
+			// to ease diagonal arrows
+			if (index === action.stepIndex + 1) {
+				return {
+					...step,
+					parentStepPromiseState: "rejected"
+				}
 			}
 			return step;
 		});
