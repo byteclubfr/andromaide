@@ -20,6 +20,12 @@ export function toggleIntermediatePromises () {
 	}
 }
 
+export function toggleCbsName () {
+	return {
+		type: types.TOGGLE_CBS_NAME
+	}
+}
+
 // source
 
 export function changeInitValue (value) {

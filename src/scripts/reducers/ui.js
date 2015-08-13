@@ -1,5 +1,5 @@
 import {
-	TOGGLE_OPTIONS, TOGGLE_EXECUTOR, TOGGLE_INTERMEDIATE_PROMISES,
+	TOGGLE_OPTIONS, TOGGLE_EXECUTOR, TOGGLE_INTERMEDIATE_PROMISES, TOGGLE_CBS_NAME,
 	FULFILL, REJECT
 } from "../constants/action-types";
 
@@ -8,6 +8,7 @@ const initialState = {
 	options: false,
 	executor: false,
 	intermediatePromises: true,
+	cbsName: false,
 	// block certain part of the UI (buttons, textareas...)
 	settled: false
 };
@@ -22,6 +23,9 @@ export default function Ui (state = initialState, action) {
 
 	case TOGGLE_INTERMEDIATE_PROMISES:
 		return { ...state, intermediatePromises: !state.intermediatePromises };
+
+	case TOGGLE_CBS_NAME:
+		return { ...state, cbsName: !state.cbsName };
 
 	case FULFILL:
 	case REJECT:
