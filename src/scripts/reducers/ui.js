@@ -1,10 +1,15 @@
-import { TOGGLE_OPTIONS, TOGGLE_EXECUTOR, TOGGLE_INTERMEDIATE_PROMISES } from "../constants/action-types";
+import {
+	TOGGLE_OPTIONS, TOGGLE_EXECUTOR, TOGGLE_INTERMEDIATE_PROMISES,
+	FULFILL, REJECT
+} from "../constants/action-types";
 
-// toggles, show or hide
 const initialState = {
+	// toggles, show or hide
 	options: false,
 	executor: false,
-	intermediatePromises: true
+	intermediatePromises: true,
+	// block certain part of the UI (buttons, textareas...)
+	settled: false
 };
 
 export default function Ui (state = initialState, action) {
@@ -17,6 +22,10 @@ export default function Ui (state = initialState, action) {
 
 	case TOGGLE_INTERMEDIATE_PROMISES:
 		return { ...state, intermediatePromises: !state.intermediatePromises };
+
+	case FULFILL:
+	case REJECT:
+		return { ...state, settled: true };
 
 	default:
 		return state;

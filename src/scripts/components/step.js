@@ -1,6 +1,7 @@
 "use strict";
 
 import React, { Component } from "react";
+import classNames from "classnames";
 import Arrows from "./arrows";
 import PromiseId from "./promise-id";
 
@@ -29,13 +30,26 @@ class Method extends Component {
 // Cbs = Callbacks
 class Cbs extends Component {
 	render () {
-		const { cbs, actions, index } = this.props;
+		const { cbs, actions, index, ui, parentStepPromiseState } = this.props;
 
 		return (
 			<div className="step-cbs">
 				{cbs.map(cb => cb.type === "fulfilled"
-						? <OnFulfilled key="fulfilled" body={cb.body} onChange={actions.changeOnFulfilledBody.bind(null, index)} />
-						: <OnRejected key="rejected" body={cb.body} onChange={actions.changeOnRejectedBody.bind(null, index)} />)}
+					? <OnFulfilled
+							key="fulfilled"
+							body={cb.body}
+							onChange={actions.changeOnFulfilledBody.bind(null, index)}
+							disabled={ui.settled}
+							notCalled={ui.settled && parentStepPromiseState === "rejected"}
+						/>
+					: <OnRejected
+							key="rejected"
+							body={cb.body}
+							onChange={actions.changeOnRejectedBody.bind(null, index)}
+							disabled={ui.settled}
+							notCalled={ui.settled && parentStepPromiseState === "fulfilled"}
+						/>
+				)}
 			</div>
 		);
 	}
@@ -46,12 +60,12 @@ class OnFulfilled extends Component {
 		this.props.onChange(event.target.value);
 	}
 	render () {
-		const { body } = this.props;
+		const { body, disabled, notCalled } = this.props;
 
 		return (
-			<div className="step-cb on-fulfilled">
+			<div className={classNames("step-cb", "on-fulfilled", { "not-called": notCalled })}>
 				function onFulfilled (data) &#123;
-					<textarea value={body} onChange={::this.handleChange}></textarea>
+					<textarea value={body} onChange={::this.handleChange} disabled={disabled}></textarea>
 				&#125;
 			</div>
 		);
@@ -63,12 +77,12 @@ class OnRejected extends Component {
 		this.props.onChange(event.target.value);
 	}
 	render () {
-		const { body } = this.props;
+		const { body, disabled, notCalled } = this.props;
 
 		return (
-			<div className="step-cb on-rejected">
+			<div className={classNames("step-cb", "on-rejected", { "not-called": notCalled })}>
 				function onRejected (err) &#123;
-					<textarea value={body} onChange={::this.handleChange}></textarea>
+					<textarea value={body} onChange={::this.handleChange} disabled={disabled}></textarea>
 				&#125;
 			</div>
 		);
@@ -84,11 +98,11 @@ export default class Step extends Component {
 
 		return (
 				<li className={"step step-" + method}>
-					<button className="step-remove" onClick={::this.handleRemove} title="Remove this step">×</button>
+					<button className="step-remove" onClick={::this.handleRemove} title="Remove this step" disabled={ui.settled}>×</button>
 					<div className="step-title">Step {index}</div>
 					<Arrows parentStep={parentStep} />
 					<Method method={method} index={index} promise={promise} parentStepPromiseState={parentStep.promise.state} intermediatePromises={ui.intermediatePromises} />
-					<Cbs index={index} cbs={cbs} actions={actions} />
+					<Cbs index={index} cbs={cbs} actions={actions} ui={ui} parentStepPromiseState={parentStep.promise.state} />
 					<div className="step-method-end"><strong>){ui.intermediatePromises ? ";" : ""}</strong></div>
 				</li>
 		);
