@@ -6,6 +6,7 @@
   "scripts": {
     "build": "mkdir -p dist && npm run components && npm run styles && npm run html",
     "components": "browserify src/scripts/index.js --debug -t [babelify --stage 0] --outfile dist/bundle.js",
+    "deploy": "gh-pages-deploy",
     "html": "cp src/index.html dist",
     "start": "http-server dist",
     "styles": "stylus src/styles/style.styl --out dist/",
@@ -29,6 +30,13 @@
     "browserify": "^11.0.1",
     "eslint": "^1.0.0",
     "eslint-plugin-react": "^3.2.0",
+    "gh-pages-deploy": "^0.3.0",
     "stylus": "^0.52.0"
+  },
+  "gh-pages-deploy": {
+    "staticpath": "dist",
+    "prep": [
+      "build"
+    ]
   }
 }
