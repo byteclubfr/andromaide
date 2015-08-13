@@ -21,9 +21,19 @@ body {
 	width: 60%;
 }
 
+// layout
+
+footer {
+	height: 2em;
+}
+
+// form elements
+
 button {
 	background: #ddd;
-	border: 1px solid #999;
+	border: 0;
+	border-radius: 2px;
+	box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
 	cursor: pointer;
 	padding: 0.5em;
 }
@@ -58,6 +68,7 @@ textarea {
 }
 
 .step {
+	background: #f3f3f3;
 	margin: 1em 0;
 }
 
@@ -78,10 +89,14 @@ textarea {
 
 .step-remove {
 	float: right;
+	height: 2em;
+	margin-left: 1em;
+	width: 2em;
 }
 
 .step-title {
-	color: #666;
+	color: #888;
+	font-size: 1.4em;
 	text-align: right;
 }
 
@@ -90,11 +105,19 @@ textarea {
 }
 
 .step-cb {
-	width: 50%;
+	width: 48%;
+}
+
+.step-cb.on-fulfilled {
+	margin-right: 2%;
+}
+
+.step-cb.on-rejected {
+	margin-left: 2%;
 }
 
 .step-catch .step-cb {
-	margin-left: 50%;
+	margin-left: 52%;
 }
 
 .pending {
@@ -116,18 +139,24 @@ textarea {
 	color: darkError;
 }
 
-/* buttons */
+.step-add-buttons {
+	display: flex;
+	flex-wrap: wrap;
+}
 
 .fulfill,
 .add-then1 {
-	width: 50%;
-}
-
-.add-then2 {
-	width: 100%;
+	margin-right: 2%;
+	width: 48%;
 }
 
 .reject,
 .add-catch {
-	width: 50%;
+	margin-left: 2%;
+	width: 48%;
+}
+
+.add-then2 {
+	margin-bottom: 1em;
+	width: 100%;
 }

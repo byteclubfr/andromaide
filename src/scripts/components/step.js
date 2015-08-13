@@ -96,9 +96,9 @@ export default class Step extends Component {
 
 		return (
 				<li className={"step step-" + method}>
-					<Arrows upStepPromiseState={upStep.promise.state} />
 					<button className="step-remove" onClick={::this.handleRemove} title="Remove this step">×</button>
 					<div className="step-title">Step {index}</div>
+					<Arrows upStepPromiseState={upStep.promise.state} />
 					<Method method={method} index={index} promise={promise} upStepPromiseState={upStep.promise.state} intermediatePromises={ui.intermediatePromises} />
 					<Cbs index={index} cbs={cbs} actions={actions} />
 					<div>){ui.intermediatePromises ? ";" : ""}</div>
