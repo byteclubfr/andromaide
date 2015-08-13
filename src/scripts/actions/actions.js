@@ -5,25 +5,32 @@ import * as types from "../constants/action-types";
 export function toggleOptions () {
 	return {
 		type: types.TOGGLE_OPTIONS
-	}
+	};
 }
 
 export function toggleExecutor () {
 	return {
 		type: types.TOGGLE_EXECUTOR
-	}
+	};
 }
 
 export function toggleIntermediatePromises () {
 	return {
 		type: types.TOGGLE_INTERMEDIATE_PROMISES
-	}
+	};
 }
 
 export function toggleCbsName () {
 	return {
 		type: types.TOGGLE_CBS_NAME
-	}
+	};
+}
+
+export function changeFakeDelay (fakeDelay) {
+	return {
+		type: types.CHANGE_FAKE_DELAY,
+		fakeDelay: Number(fakeDelay)
+	};
 }
 
 // source
@@ -32,7 +39,7 @@ export function changeInitValue (value) {
 	return {
 		type: types.CHANGE_INIT_VALUE,
 		value
-	}
+	};
 }
 
 export function fulfill (value, stepIndex, promise) {
@@ -42,7 +49,7 @@ export function fulfill (value, stepIndex, promise) {
 		type: types.FULFILL,
 		promise,
 		stepIndex
-	}
+	};
 }
 
 export function reject (value, stepIndex, promise) {
@@ -52,7 +59,7 @@ export function reject (value, stepIndex, promise) {
 		type: types.REJECT,
 		promise,
 		stepIndex
-	}
+	};
 }
 
 // steps
@@ -64,7 +71,7 @@ export function addThen1 () {
 		cbs: [
 			{ type: "fulfilled", body: "return data;" }
 		]
-	}
+	};
 }
 
 export function addThen2 () {
@@ -75,7 +82,7 @@ export function addThen2 () {
 			{ type: "fulfilled", body: "return data;" },
 			{ type: "rejected", body: "throw err;" }
 		]
-	}
+	};
 }
 
 export function addCatch () {
@@ -85,7 +92,7 @@ export function addCatch () {
 		cbs: [
 			{ type: "rejected", body: "throw err;" }
 		]
-	}
+	};
 }
 
 export function removeStep (index) {
@@ -102,7 +109,7 @@ export function changeOnFulfilledBody (index, body) {
 		type: types.CHANGE_ON_FULFILLED_BODY,
 		index,
 		body
-	}
+	};
 }
 
 export function changeOnRejectedBody (index, body) {
@@ -110,5 +117,5 @@ export function changeOnRejectedBody (index, body) {
 		type: types.CHANGE_ON_REJECTED_BODY,
 		index,
 		body
-	}
+	};
 }

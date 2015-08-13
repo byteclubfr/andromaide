@@ -16,14 +16,14 @@ export default class Arrows extends Component {
 				</div>
 			);
 		}
-		if (grandParentState === "fulfilled") {
+		if (grandParentState === "fulfilled" && parentState !== "pending") {
 			return (
 				<div className="step-arrows">
 					<div className="step-arrow-diagonal rejected">⬊</div>
 				</div>
 			);
 		}
-		if (grandParentState === "rejected") {
+		if (grandParentState === "rejected" && parentState !== "pending") {
 			return (
 				<div className="step-arrows">
 					<div className="step-arrow-diagonal fulfilled">⬋</div>

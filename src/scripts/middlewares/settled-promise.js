@@ -5,17 +5,7 @@ export default store => next => action => {
 		return next(action)
 	}
 
-	function createNextPromise (data) {
-		var nextStep = store.getState().steps[action.stepIndex + 1];
-		var fns = getCbsFns(buildCbsFns(nextStep.cbs));
-
-		var p = data.result
-			? Promise.resolve(data.result)
-			: Promise.reject(data.error)
-		return p.then(fns.onFulfilled, fns.onRejected);
-	}
-
-	function makeAction (settled, data) {
+	function createAction (settled, data) {
 		let newAction = {
 			...action,
 			settled,
@@ -25,32 +15,46 @@ export default store => next => action => {
 		return newAction;
 	}
 
-	function makeNextAction (data) {
+	function createNextPromise (data) {
+		var nextStep = store.getState().steps[action.stepIndex + 1];
+		var fns = getCbsFns(buildCbsFns(nextStep.cbs));
+
+		function executor (resolve, reject) {
+			setTimeout(function () {
+				if (data.result) {
+					resolve(data.result)
+				} else {
+					reject(data.error);
+				}
+			}, store.getState().ui.fakeDelay);
+		}
+
+		var p = new Promise(executor);
+		return p.then(fns.onFulfilled, fns.onRejected);
+	}
+
+	function createNextAction (data) {
 		var nextP = createNextPromise(data);
 		nextP.then(
 			result => store.dispatch(fulfill(result, action.stepIndex + 1, nextP)),
 			error => store.dispatch(reject(error, action.stepIndex + 1, nextP))
 		);
-		if (data.result) {
-			return fulfill(data.result, action.stepIndex + 1, createNextPromise(data));
-		}
-		return reject(data.error, action.stepIndex + 1, createNextPromise(data));
 	}
 
 	function isLastStep () {
 		return action.stepIndex === store.getState().steps.length - 1;
 	}
 
-	next(makeAction(false));
+	next(createAction(false));
 
 	return action.promise.then(
 		result => {
-			next(makeAction(true, { result }));
-			if (!isLastStep()) makeNextAction({ result });
+			next(createAction(true, { result }));
+			if (!isLastStep()) createNextAction({ result });
 		},
 		error => {
-			next(makeAction(true, { error }));
-			if (!isLastStep()) makeNextAction({ error });
+			next(createAction(true, { error }));
+			if (!isLastStep()) createNextAction({ error });
 		}
 	);
 };
