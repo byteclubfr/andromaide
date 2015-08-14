@@ -7,7 +7,7 @@ import {
 const initialState = [
 	// 0 = source
 	{
-		initValue: "toto",
+		initValue: "'toto'",
 		promise: {
 			state: "pending"
 		}

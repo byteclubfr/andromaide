@@ -2,6 +2,22 @@
 
 import React, { Component, PropTypes } from "react";
 
+class ArrowValue extends Component {
+	static propTypes = {
+		value: PropTypes.node
+	}
+
+	render () {
+		const { value } = this.props;
+		let v = value.toString();
+		v = typeof value == "string" ? "'" + value.toString() + "'" : v;
+
+		return (
+			<div className="step-arrow-value">{v}</div>
+		);
+	}
+}
+
 export default class Arrows extends Component {
 	static propTypes = {
 		parentStep: PropTypes.object.isRequired
@@ -19,11 +35,11 @@ export default class Arrows extends Component {
 			return (
 				<div className="step-arrows">
 					<div className="step-arrow fulfilled">
-						<div>{parentState === "fulfilled" ? parentStep.promise.value : ""}</div>
+						<ArrowValue value={parentState === "fulfilled" ? parentStep.promise.value : ""} />
 						<div className="step-arrow-icon">{parentState === "fulfilled" ? "⬇" : ""}</div>
 					</div>
 					<div className="step-arrow rejected">
-						<div>{parentState === "rejected" ? parentStep.promise.value : ""}</div>
+						<ArrowValue value={parentState === "rejected" ? parentStep.promise.value : ""} />
 						<div className="step-arrow-icon">{parentState === "rejected" ? "⬇" : ""}</div>
 					</div>
 				</div>
@@ -36,7 +52,7 @@ export default class Arrows extends Component {
 			return (
 				<div className="step-arrows">
 					<div className="step-arrow-diagonal rejected">
-						<div>{parentStep.promise.value}</div>
+						<ArrowValue value={parentStep.promise.value} />
 						<div className="step-arrow-icon">⬊</div>
 					</div>
 				</div>
@@ -46,7 +62,7 @@ export default class Arrows extends Component {
 			return (
 				<div className="step-arrows">
 					<div className="step-arrow-diagonal fulfilled">
-						<div>{parentStep.promise.value}</div>
+						<ArrowValue value={parentStep.promise.value} />
 						<div className="step-arrow-icon">⬋</div>
 					</div>
 				</div>

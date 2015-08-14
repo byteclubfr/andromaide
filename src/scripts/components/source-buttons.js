@@ -11,11 +11,11 @@ export default class SourceButtons extends Component {
 	}
 
 	handleFulfill () {
-		this.props.fulfill(this.props.initValue, 0);
+		this.props.fulfill(eval(this.props.initValue), 0);
 	}
 
 	handleReject () {
-		this.props.reject(this.props.initValue, 0);
+		this.props.reject(eval(this.props.initValue), 0);
 	}
 
 	render () {

@@ -51,7 +51,7 @@ function executor (resolve, reject) {
 		return (
 				<div className="source">
 					<div className="source-title">Source</div>
-					<div className="source-init-value">var initValue = <input disabled={disabled} onChange={::this.handleChangeInitValue} value={step.initValue} /></div>
+					<div className="source-init-value">var initValue = <input disabled={disabled} onChange={::this.handleChangeInitValue} value={step.initValue} />;</div>
 					<pre className={classNames("source-snippet", { hidden: !ui.executor })}>{snippet}</pre>
 					<div className="source-assign">{assign}</div>
 					<SourceButtons {...actions} disabled={disabled} initValue={step.initValue} />
