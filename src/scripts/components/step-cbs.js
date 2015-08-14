@@ -15,7 +15,7 @@ class OnFulfilled extends Component {
 		return (
 			<div className={classNames("step-cb", "on-fulfilled", { "not-called": notCalled })}>
 				function <span>{anonymous ? "" : "onFulfilled" + index}</span>(data) &#123;
-					<textarea disabled={disabled} onChange={::this.handleChange} value={body}></textarea>
+					<textarea disabled={disabled} onChange={::this.handleChange} value={body} />
 				&#125;
 			</div>
 		);
@@ -34,7 +34,7 @@ class OnRejected extends Component {
 		return (
 			<div className={classNames("step-cb", "on-rejected", { "not-called": notCalled })}>
 				function <span>{anonymous ? "" : "onRejected" + index}</span> (err) &#123;
-					<textarea disabled={disabled} onChange={::this.handleChange} value={body}></textarea>
+					<textarea disabled={disabled} onChange={::this.handleChange} value={body} />
 				&#125;
 			</div>
 		);
