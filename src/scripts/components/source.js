@@ -20,7 +20,7 @@ export default class Source extends Component {
 
 	render () {
 		const { actions, step, ui } = this.props;
-		const disabled = Boolean(ui.settled);
+		const disabled = step.promise.state !== "pending";
 		var assign;
 
 		// snippets

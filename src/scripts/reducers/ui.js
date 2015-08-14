@@ -1,7 +1,6 @@
 import {
 	TOGGLE_OPTIONS, TOGGLE_EXECUTOR, TOGGLE_INTERMEDIATE_PROMISES, TOGGLE_CBS_NAME,
-	CHANGE_FAKE_DELAY,
-	FULFILL, REJECT
+	CHANGE_FAKE_DELAY
 } from "../constants/action-types";
 
 const initialState = {
@@ -10,11 +9,7 @@ const initialState = {
 	executor: false,
 	intermediatePromises: true,
 	cbsName: false,
-	fakeDelay: 0,
-
-	// Non persistent
-	// block certain part of the UI (buttons, textareas...)
-	settled: false
+	fakeDelay: 0
 };
 
 export default function Ui (state = initialState, action) {
@@ -33,10 +28,6 @@ export default function Ui (state = initialState, action) {
 
 	case CHANGE_FAKE_DELAY:
 		return { ...state, fakeDelay: action.fakeDelay };
-
-	case FULFILL:
-	case REJECT:
-		return { ...state, settled: true };
 
 	default:
 		return state;

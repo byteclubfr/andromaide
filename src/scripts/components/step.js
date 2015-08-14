@@ -55,7 +55,7 @@ export default class Step extends Component {
 
 		return (
 				<li className={"step step-" + method}>
-					<button className="step-remove" disable={ui.settled} onClick={::this.handleRemove} title="Remove this step">×</button>
+					<button className="step-remove" disabled={promise.state !== "pending"} onClick={::this.handleRemove} title="Remove this step">×</button>
 					<div className="step-title">Step {index}</div>
 					<Arrows parentStep={parentStep} />
 					<Method

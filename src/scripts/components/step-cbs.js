@@ -62,7 +62,7 @@ export default class Cbs extends Component {
 
 	render () {
 		const { actions, cbs, index, parentStepPromiseState, ui } = this.props;
-		const disabled = Boolean(ui.settled);
+		const disabled = parentStepPromiseState !== "pending";
 
 		return (
 			<div className="step-cbs">
