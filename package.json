@@ -10,7 +10,9 @@
     "html": "cp src/index.html dist",
     "start": "http-server dist",
     "styles": "stylus src/styles/style.styl --out dist/",
-    "w-styles": "stylus -w src/styles/styles.styl --out dist/"
+    "w-components": "watchify src/scripts/index.js -v -t [babelify --stage 0] --outfile dist/bundle.js",
+    "w-styles": "stylus -w src/styles/styles.styl --out dist/",
+    "watch": "npm run w-components && npm run w-styles"
   },
   "author": "Delapouite <delapouite@gmail.com> (http://delapouite.com)",
   "license": "ISC",
@@ -33,7 +35,9 @@
     "eslint": "^1.0.0",
     "eslint-plugin-react": "^3.2.0",
     "gh-pages-deploy": "^0.3.0",
-    "stylus": "^0.52.0"
+    "livereactload": "^0.6.0",
+    "stylus": "^0.52.0",
+    "watchify": "^3.3.1"
   },
   "gh-pages-deploy": {
     "staticpath": "dist",
