@@ -18,8 +18,14 @@ export default class Arrows extends Component {
 		if (!grandParentState || parentState === grandParentState) {
 			return (
 				<div className="step-arrows">
-					<div className="step-arrow fulfilled">{parentState === "fulfilled" ? "⬇" : ""}</div>
-					<div className="step-arrow rejected">{parentState === "rejected" ? "⬇" : ""}</div>
+					<div className="step-arrow fulfilled">
+						<div>{parentState === "fulfilled" ? parentStep.promise.value : ""}</div>
+						<div className="step-arrow-icon">{parentState === "fulfilled" ? "⬇" : ""}</div>
+					</div>
+					<div className="step-arrow rejected">
+						<div>{parentState === "rejected" ? parentStep.promise.value : ""}</div>
+						<div className="step-arrow-icon">{parentState === "rejected" ? "⬇" : ""}</div>
+					</div>
 				</div>
 			);
 		}
@@ -29,14 +35,20 @@ export default class Arrows extends Component {
 		if (grandParentState === "fulfilled") {
 			return (
 				<div className="step-arrows">
-					<div className="step-arrow-diagonal rejected">⬊</div>
+					<div className="step-arrow-diagonal rejected">
+						<div>{parentStep.promise.value}</div>
+						<div className="step-arrow-icon">⬊</div>
+					</div>
 				</div>
 			);
 		}
 		if (grandParentState === "rejected") {
 			return (
 				<div className="step-arrows">
-					<div className="step-arrow-diagonal fulfilled">⬋</div>
+					<div className="step-arrow-diagonal fulfilled">
+						<div>{parentStep.promise.value}</div>
+						<div className="step-arrow-icon">⬋</div>
+					</div>
 				</div>
 			);
 		}
