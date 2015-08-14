@@ -3,6 +3,10 @@
 import React, { Component, PropTypes } from "react";
 
 export default class SourceButtons extends Component {
+	static propTypes = {
+		disabled: PropTypes.bool.isRequired
+	}
+
 	handleFulfill () {
 		this.props.fulfill(this.props.initValue, 0);
 	}
@@ -16,12 +20,9 @@ export default class SourceButtons extends Component {
 
 		return (
 			<div className="source-buttons">
-				<button className="fulfill" onClick={::this.handleFulfill} disabled={disabled}>Fulfill</button>
-				<button className="reject" onClick={::this.handleReject} disabled={disabled}>Reject</button>
+				<button className="fulfill" disabled={disabled} onClick={::this.handleFulfill}>Fulfill</button>
+				<button className="reject" disabled={disabled} onClick={::this.handleReject}>Reject</button>
 			</div>
 		);
 	}
 }
-SourceButtons.propTypes = {
-	disabled: PropTypes.bool.isRequired
-};

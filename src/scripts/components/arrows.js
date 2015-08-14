@@ -3,6 +3,10 @@
 import React, { Component, PropTypes } from "react";
 
 export default class Arrows extends Component {
+	static propTypes = {
+		parentStep: PropTypes.object.isRequired
+	}
+
 	render () {
 		const { parentStep } = this.props;
 		const grandParentState = parentStep.parentStepPromiseState;
@@ -37,7 +41,3 @@ export default class Arrows extends Component {
 		return <div />;
 	}
 }
-
-Arrows.propTypes = {
-	parentStep: PropTypes.object.isRequired
-};

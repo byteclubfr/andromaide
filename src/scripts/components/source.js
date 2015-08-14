@@ -7,8 +7,14 @@ import PromiseId from "./promise-id";
 import SourceButtons from "./source-buttons";
 
 export default class Source extends Component {
+	static propTypes = {
+		actions: PropTypes.object.isRequired,
+		step: PropTypes.object.isRequired,
+		ui: PropTypes.object.isRequired
+	}
+
 	// typing in the input
-	handleChangeInitValue(event) {
+	handleChangeInitValue (event) {
 		this.props.actions.changeInitValue(event.target.value);
 	}
 
@@ -18,7 +24,6 @@ export default class Source extends Component {
 		var assign;
 
 		// snippets
-		const shortSnippet = "";
 		const longSnippet =
 `
 function executor (resolve, reject) {
@@ -31,7 +36,7 @@ function executor (resolve, reject) {
 	});
 }
 `;
-		const snippet = true ? longSnippet : shortSnippet;
+		const snippet = longSnippet;
 
 		if (ui.intermediatePromises) {
 			assign = [
@@ -46,17 +51,11 @@ function executor (resolve, reject) {
 		return (
 				<div className="source">
 					<div className="source-title">Source</div>
-					<div className="source-init-value">var initValue = <input value={step.initValue} onChange={::this.handleChangeInitValue} disabled={disabled} /></div>
+					<div className="source-init-value">var initValue = <input disabled={disabled} onChange={::this.handleChangeInitValue} value={step.initValue} /></div>
 					<pre className={classNames("source-snippet", { hidden: !ui.executor })}>{snippet}</pre>
 					<div className="source-assign">{assign}</div>
-					<SourceButtons {...actions} initValue={step.initValue} disabled={disabled} />
+					<SourceButtons {...actions} disabled={disabled} initValue={step.initValue} />
 				</div>
 		);
 	}
 }
-
-Source.propTypes = {
-	actions: PropTypes.object.isRequired,
-	step: PropTypes.object.isRequired,
-	ui: PropTypes.object.isRequired
-};

@@ -5,6 +5,12 @@ import React, { Component, PropTypes } from "react";
 import Step from "./step";
 
 export default class Steps extends Component {
+	static propTypes = {
+		actions: PropTypes.object.isRequired,
+		steps: PropTypes.array.isRequired,
+		ui: PropTypes.object.isRequired
+	}
+
 	render () {
 		const { actions, steps, ui } = this.props;
 
@@ -14,8 +20,8 @@ export default class Steps extends Component {
 				{tail(steps).map((step, i) =>
 					<Step
 						actions={actions}
-						key={i + 1}
 						index={i + 1}
+						key={i + 1}
 						parentStep={steps[i]}
 						step={step}
 						ui={ui}
@@ -25,9 +31,3 @@ export default class Steps extends Component {
 		);
 	}
 }
-
-Steps.propTypes = {
-	actions: PropTypes.object.isRequired,
-	steps: PropTypes.array.isRequired,
-	ui: PropTypes.object.isRequired
-};

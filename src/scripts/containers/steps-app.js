@@ -24,6 +24,12 @@ function mapDispatchToProps (dispatch) {
 }
 
 class StepsApp extends Component {
+	static propTypes = {
+		actions: PropTypes.object.isRequired,
+		steps: PropTypes.array.isRequired,
+		ui: PropTypes.object.isRequired
+	}
+
 	render () {
 		// from mapStateToProps and mapStateToProps
 		const { actions, steps, ui } = this.props;
@@ -38,11 +44,5 @@ class StepsApp extends Component {
 		);
 	}
 }
-
-StepsApp.propTypes = {
-	actions: PropTypes.object.isRequired,
-	steps: PropTypes.array.isRequired,
-	ui: PropTypes.object.isRequired
-};
 
 export default connect(mapStateToProps, mapDispatchToProps)(StepsApp);

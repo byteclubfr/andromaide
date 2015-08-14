@@ -3,6 +3,10 @@
 import React, { Component, PropTypes } from "react";
 
 export default class StepButtons extends Component {
+	static propTypes = {
+		actions: PropTypes.object.isRequired
+	}
+
 	render () {
 		const { addThen1, addThen2, addCatch } = this.props.actions;
 
@@ -15,7 +19,3 @@ export default class StepButtons extends Component {
 		);
 	}
 }
-
-StepButtons.propTypes = {
-	actions: PropTypes.object.isRequired
-};

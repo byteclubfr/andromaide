@@ -1,7 +1,6 @@
 "use strict";
 
 import React, { Component, PropTypes } from "react";
-import classNames from "classnames";
 
 import Arrows from "./arrows";
 import Cbs from "./step-cbs";
@@ -9,6 +8,14 @@ import PromiseId from "./promise-id";
 
 // then, catch
 class Method extends Component {
+	static propTypes = {
+		index: PropTypes.number.isRequired,
+		intermediatePromises: PropTypes.bool.isRequired,
+		method: PropTypes.string.isRequired,
+		parentStepPromiseState: PropTypes.string.isRequired,
+		promise: PropTypes.object.isRequired
+	}
+
 	render () {
 		const { index, intermediatePromises, method, parentStepPromiseState, promise } = this.props;
 		const parentStepIndex = index === 1 ? "Source" : index - 1;
@@ -29,21 +36,21 @@ class Method extends Component {
 	}
 }
 
-Method.propTypes = {
-	index: PropTypes.number.isRequired,
-	intermediatePromises: PropTypes.bool.isRequired,
-	method: PropTypes.string.isRequired,
-	parentStepPromiseState: PropTypes.string.isRequired,
-	promise: PropTypes.object.isRequired
-};
-
 export default class Step extends Component {
+	static propTypes = {
+		actions: PropTypes.object.isRequired,
+		index: PropTypes.number.isRequired,
+		parentStep: PropTypes.object.isRequired,
+		step: PropTypes.object.isRequired,
+		ui: PropTypes.object.isRequired
+	}
+
 	// click on the top right cross
 	handleRemove () {
 		this.props.actions.removeStep(this.props.index);
 	}
 
-	render() {
+	render () {
 		const { actions, index, parentStep, step: { method, cbs, promise }, ui } = this.props;
 
 		return (
@@ -65,10 +72,3 @@ export default class Step extends Component {
 	}
 }
 
-Step.propTypes = {
-	actions: PropTypes.object.isRequired,
-	index: PropTypes.number.isRequired,
-	parentStep: PropTypes.object.isRequired,
-	step: PropTypes.object.isRequired,
-	ui: PropTypes.object.isRequired
-};

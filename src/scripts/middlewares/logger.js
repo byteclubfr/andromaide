@@ -1,3 +1,5 @@
+/*eslint no-console:0 */
+
 export default store => next => action => {
 	console.group(action.type);
 	console.info("dispatching", action);
