@@ -7,9 +7,11 @@ import PromiseId from "./promise-id";
 import SourceButtons from "./source-buttons";
 
 export default class Source extends Component {
+	// typing in the input
 	handleChangeInitValue(event) {
 		this.props.actions.changeInitValue(event.target.value);
 	}
+
 	render () {
 		const { step, ui, actions } = this.props;
 		var assign;

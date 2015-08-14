@@ -4,9 +4,11 @@ import React, { Component } from "react";
 import classNames from "classnames";
 
 export default class Options extends Component {
+	// typing in input
 	handleChangeFakeDelay (event) {
 		this.props.actions.changeFakeDelay(event.target.value);
 	}
+
 	render () {
 		const {
 			actions: { toggleOptions, toggleExecutor, toggleIntermediatePromises, toggleCbsName },

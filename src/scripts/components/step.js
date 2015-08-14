@@ -2,7 +2,9 @@
 
 import React, { Component } from "react";
 import classNames from "classnames";
+
 import Arrows from "./arrows";
+import Cbs from "./step-cbs";
 import PromiseId from "./promise-id";
 
 // then, catch
@@ -27,76 +29,12 @@ class Method extends Component {
 	}
 }
 
-// Cbs = Callbacks
-class Cbs extends Component {
-	render () {
-		const { cbs, actions, index, ui, parentStepPromiseState } = this.props;
-
-		return (
-			<div className="step-cbs">
-				{cbs.map(cb => cb.type === "fulfilled"
-					? <OnFulfilled
-							key="fulfilled"
-							index={index}
-							body={cb.body}
-							onChange={actions.changeOnFulfilledBody.bind(null, index)}
-							disabled={ui.settled}
-							notCalled={ui.settled && parentStepPromiseState === "rejected"}
-							anonymous={!ui.cbsName}
-						/>
-					: <OnRejected
-							key="rejected"
-							body={cb.body}
-							index={index}
-							onChange={actions.changeOnRejectedBody.bind(null, index)}
-							disabled={ui.settled}
-							notCalled={ui.settled && parentStepPromiseState === "fulfilled"}
-							anonymous={!ui.cbsName}
-						/>
-				)}
-			</div>
-		);
-	}
-}
-
-class OnFulfilled extends Component {
-	handleChange(event) {
-		this.props.onChange(event.target.value);
-	}
-	render () {
-		const { body, disabled, index, notCalled, anonymous } = this.props;
-
-		return (
-			<div className={classNames("step-cb", "on-fulfilled", { "not-called": notCalled })}>
-				function <span>{anonymous ? "" : "onFulfilled" + index}</span>(data) &#123;
-					<textarea value={body} onChange={::this.handleChange} disabled={disabled}></textarea>
-				&#125;
-			</div>
-		);
-	}
-}
-
-class OnRejected extends Component {
-	handleChange(event) {
-		this.props.onChange(event.target.value);
-	}
-	render () {
-		const { body, disabled, index, notCalled, anonymous } = this.props;
-
-		return (
-			<div className={classNames("step-cb", "on-rejected", { "not-called": notCalled })}>
-				function <span>{anonymous ? "" : "onRejected" + index}</span> (err) &#123;
-					<textarea value={body} onChange={::this.handleChange} disabled={disabled}></textarea>
-				&#125;
-			</div>
-		);
-	}
-}
-
 export default class Step extends Component {
+	// click on the top right cross
 	handleRemove () {
 		this.props.actions.removeStep(this.props.index);
 	}
+
 	render() {
 		const { step: { method, cbs, promise }, parentStep, ui, index, actions } = this.props;
 
