@@ -1,6 +1,6 @@
 "use strict";
 
-import React, { Component } from "react";
+import React, { Component, PropTypes } from "react";
 import classNames from "classnames";
 
 class OnFulfilled extends Component {
@@ -10,7 +10,7 @@ class OnFulfilled extends Component {
 	}
 
 	render () {
-		const { body, disabled, index, notCalled, anonymous } = this.props;
+		const { anonymous, body, disabled, index, notCalled } = this.props;
 
 		return (
 			<div className={classNames("step-cb", "on-fulfilled", { "not-called": notCalled })}>
@@ -29,7 +29,7 @@ class OnRejected extends Component {
 	}
 
 	render () {
-		const { body, disabled, index, notCalled, anonymous } = this.props;
+		const { anonymous, body, disabled, index, notCalled } = this.props;
 
 		return (
 			<div className={classNames("step-cb", "on-rejected", { "not-called": notCalled })}>
@@ -41,10 +41,19 @@ class OnRejected extends Component {
 	}
 }
 
+OnFulfilled.propTypes = OnRejected.propTypes = {
+	anonymous: PropTypes.bool.isRequired,
+	body: PropTypes.string.isRequired,
+	disabled: PropTypes.bool.isRequired,
+	index: PropTypes.number.isRequired,
+	notCalled: PropTypes.bool.isRequired
+};
+
 // Cbs = Callbacks
 export default class Cbs extends Component {
 	render () {
-		const { cbs, actions, index, ui, parentStepPromiseState } = this.props;
+		const { actions, cbs, index, parentStepPromiseState, ui } = this.props;
+		const disabled = Boolean(ui.settled);
 
 		return (
 			<div className="step-cbs">
@@ -54,8 +63,8 @@ export default class Cbs extends Component {
 							index={index}
 							body={cb.body}
 							onChange={actions.changeOnFulfilledBody.bind(null, index)}
-							disabled={ui.settled}
-							notCalled={ui.settled && parentStepPromiseState === "rejected"}
+							disabled={disabled}
+							notCalled={disabled && parentStepPromiseState === "rejected"}
 							anonymous={!ui.cbsName}
 						/>
 					: <OnRejected
@@ -63,8 +72,8 @@ export default class Cbs extends Component {
 							body={cb.body}
 							index={index}
 							onChange={actions.changeOnRejectedBody.bind(null, index)}
-							disabled={ui.settled}
-							notCalled={ui.settled && parentStepPromiseState === "fulfilled"}
+							disabled={disabled}
+							notCalled={disabled && parentStepPromiseState === "fulfilled"}
 							anonymous={!ui.cbsName}
 						/>
 				)}
@@ -72,3 +81,11 @@ export default class Cbs extends Component {
 		);
 	}
 }
+
+Cbs.propTypes = {
+	actions: PropTypes.object.isRequired,
+	cbs: PropTypes.array.isRequired,
+	index: PropTypes.number.isRequired,
+	parentStepPromiseState: PropTypes.string.isRequired,
+	ui: PropTypes.object.isRequired
+};

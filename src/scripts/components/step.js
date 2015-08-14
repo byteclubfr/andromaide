@@ -1,6 +1,6 @@
 "use strict";
 
-import React, { Component } from "react";
+import React, { Component, PropTypes } from "react";
 import classNames from "classnames";
 
 import Arrows from "./arrows";
@@ -10,10 +10,10 @@ import PromiseId from "./promise-id";
 // then, catch
 class Method extends Component {
 	render () {
-		const { method, index, promise, parentStepPromiseState, intermediatePromises } = this.props;
+		const { index, intermediatePromises, method, parentStepPromiseState, promise } = this.props;
 		const parentStepIndex = index === 1 ? "Source" : index - 1;
 
-		var assign = "";
+		var assign;
 		if (intermediatePromises) {
 			assign = [
 				<span>var </span>,
@@ -29,6 +29,14 @@ class Method extends Component {
 	}
 }
 
+Method.propTypes = {
+	index: PropTypes.number.isRequired,
+	intermediatePromises: PropTypes.bool.isRequired,
+	method: PropTypes.string.isRequired,
+	parentStepPromiseState: PropTypes.string.isRequired,
+	promise: PropTypes.object.isRequired
+};
+
 export default class Step extends Component {
 	// click on the top right cross
 	handleRemove () {
@@ -36,17 +44,31 @@ export default class Step extends Component {
 	}
 
 	render() {
-		const { step: { method, cbs, promise }, parentStep, ui, index, actions } = this.props;
+		const { actions, index, parentStep, step: { method, cbs, promise }, ui } = this.props;
 
 		return (
 				<li className={"step step-" + method}>
-					<button className="step-remove" onClick={::this.handleRemove} title="Remove this step" disabled={ui.settled}>×</button>
+					<button className="step-remove" disable={ui.settled} onClick={::this.handleRemove} title="Remove this step">×</button>
 					<div className="step-title">Step {index}</div>
 					<Arrows parentStep={parentStep} />
-					<Method method={method} index={index} promise={promise} parentStepPromiseState={parentStep.promise.state} intermediatePromises={ui.intermediatePromises} />
-					<Cbs index={index} cbs={cbs} actions={actions} ui={ui} parentStepPromiseState={parentStep.promise.state} />
+					<Method
+						index={index}
+						intermediatePromises={ui.intermediatePromises}
+						method={method}
+						parentStepPromiseState={parentStep.promise.state}
+						promise={promise}
+					/>
+					<Cbs actions={actions} cbs={cbs} index={index} parentStepPromiseState={parentStep.promise.state} ui={ui} />
 					<div className="step-method-end"><strong>){ui.intermediatePromises ? ";" : ""}</strong></div>
 				</li>
 		);
 	}
 }
+
+Step.propTypes = {
+	actions: PropTypes.object.isRequired,
+	index: PropTypes.number.isRequired,
+	parentStep: PropTypes.object.isRequired,
+	step: PropTypes.object.isRequired,
+	ui: PropTypes.object.isRequired
+};

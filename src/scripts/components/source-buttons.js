@@ -1,6 +1,6 @@
 "use strict";
 
-import React, { Component } from "react";
+import React, { Component, PropTypes } from "react";
 
 export default class SourceButtons extends Component {
 	handleFulfill () {
@@ -22,3 +22,6 @@ export default class SourceButtons extends Component {
 		);
 	}
 }
+SourceButtons.propTypes = {
+	disabled: PropTypes.bool.isRequired
+};

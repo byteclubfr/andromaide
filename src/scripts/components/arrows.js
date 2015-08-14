@@ -1,6 +1,6 @@
 "use strict";
 
-import React, { Component } from "react";
+import React, { Component, PropTypes } from "react";
 
 export default class Arrows extends Component {
 	render () {
@@ -38,3 +38,6 @@ export default class Arrows extends Component {
 	}
 }
 
+Arrows.propTypes = {
+	parentStep: PropTypes.object.isRequired
+};

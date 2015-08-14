@@ -1,6 +1,6 @@
 "use strict";
 
-import React, { Component } from "react";
+import React, { Component, PropTypes } from "react";
 import classNames from "classnames";
 
 import PromiseId from "./promise-id";
@@ -13,7 +13,8 @@ export default class Source extends Component {
 	}
 
 	render () {
-		const { step, ui, actions } = this.props;
+		const { actions, step, ui } = this.props;
+		const disabled = Boolean(ui.settled);
 		var assign;
 
 		// snippets
@@ -45,11 +46,17 @@ function executor (resolve, reject) {
 		return (
 				<div className="source">
 					<div className="source-title">Source</div>
-					<div className="source-init-value">var initValue = <input value={step.initValue} onChange={::this.handleChangeInitValue} disabled={ui.settled} /></div>
+					<div className="source-init-value">var initValue = <input value={step.initValue} onChange={::this.handleChangeInitValue} disabled={disabled} /></div>
 					<pre className={classNames("source-snippet", { hidden: !ui.executor })}>{snippet}</pre>
 					<div className="source-assign">{assign}</div>
-					<SourceButtons {...actions} initValue={step.initValue} disabled={ui.settled} />
+					<SourceButtons {...actions} initValue={step.initValue} disabled={disabled} />
 				</div>
 		);
 	}
 }
+
+Source.propTypes = {
+	actions: PropTypes.object.isRequired,
+	step: PropTypes.object.isRequired,
+	ui: PropTypes.object.isRequired
+};

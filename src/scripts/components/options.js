@@ -1,6 +1,6 @@
 "use strict";
 
-import React, { Component } from "react";
+import React, { Component, PropTypes } from "react";
 import classNames from "classnames";
 
 export default class Options extends Component {
@@ -30,3 +30,7 @@ export default class Options extends Component {
 	}
 }
 
+Options.propTypes = {
+	actions: PropTypes.object.isRequired,
+	ui: PropTypes.object.isRequired
+};

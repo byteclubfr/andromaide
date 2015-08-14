@@ -1,6 +1,6 @@
 "use strict";
 
-import React, { Component } from "react";
+import React, { Component, PropTypes } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
@@ -23,20 +23,26 @@ function mapDispatchToProps (dispatch) {
 	return { actions: bindActionCreators(StepActions, dispatch) };
 }
 
-export default class StepsApp extends Component {
+class StepsApp extends Component {
 	render () {
 		// from mapStateToProps and mapStateToProps
-		const { steps, ui, actions } = this.props;
+		const { actions, steps, ui } = this.props;
 
 		return (
 			<div>
-				<Options ui={ui} actions={actions} />
-				<Source step={steps[0]} ui={ui} actions={actions} />
-				<Steps steps={steps} ui={ui} actions={actions} />
+				<Options actions={actions} ui={ui} />
+				<Source actions={actions} step={steps[0]} ui={ui} />
+				<Steps {...this.props} />
 				<StepButtons actions={actions} />
 			</div>
 		);
 	}
 }
+
+StepsApp.propTypes = {
+	actions: PropTypes.object.isRequired,
+	steps: PropTypes.array.isRequired,
+	ui: PropTypes.object.isRequired
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(StepsApp);

@@ -1,17 +1,33 @@
 "use strict";
 
 import { tail } from "lodash";
-import React, { Component } from "react";
+import React, { Component, PropTypes } from "react";
 import Step from "./step";
 
 export default class Steps extends Component {
 	render () {
-		const { steps, ui, actions } = this.props;
+		const { actions, steps, ui } = this.props;
 
+		// tail removes the source (step[0])
 		return (
-				<ul className="steps">
-					{tail(steps).map((step, i) => <Step key={i + 1} step={step} parentStep={steps[i]} index={i + 1} ui={ui} actions={actions} />)}
-				</ul>
+			<ul className="steps">
+				{tail(steps).map((step, i) =>
+					<Step
+						actions={actions}
+						key={i + 1}
+						index={i + 1}
+						parentStep={steps[i]}
+						step={step}
+						ui={ui}
+					/>
+				)}
+			</ul>
 		);
 	}
 }
+
+Steps.propTypes = {
+	actions: PropTypes.object.isRequired,
+	steps: PropTypes.array.isRequired,
+	ui: PropTypes.object.isRequired
+};

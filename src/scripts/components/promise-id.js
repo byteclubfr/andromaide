@@ -1,6 +1,6 @@
 "use strict";
 
-import React, { Component } from "react";
+import React, { Component, PropTypes } from "react";
 
 export default class PromiseId extends Component {
 	render () {
@@ -12,3 +12,7 @@ export default class PromiseId extends Component {
 	}
 }
 
+PromiseId.propTypes = {
+	id: PropTypes.number.isRequired,
+	promiseState: PropTypes.string.isRequired
+};

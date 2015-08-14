@@ -1,6 +1,6 @@
 "use strict";
 
-import React, { Component } from "react";
+import React, { Component, PropTypes } from "react";
 
 export default class StepButtons extends Component {
 	render () {
@@ -15,3 +15,7 @@ export default class StepButtons extends Component {
 		);
 	}
 }
+
+StepButtons.propTypes = {
+	actions: PropTypes.object.isRequired
+};
