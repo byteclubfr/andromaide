@@ -4,7 +4,10 @@ import React, { Component, PropTypes } from "react";
 
 export default class SourceButtons extends Component {
 	static propTypes = {
-		disabled: PropTypes.bool.isRequired
+		disabled: PropTypes.bool.isRequired,
+		fulfill: PropTypes.func.isRequired,
+		initValue: PropTypes.string.isRequired,
+		reject: PropTypes.func.isRequred
 	}
 
 	handleFulfill () {

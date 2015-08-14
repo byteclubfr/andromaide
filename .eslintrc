@@ -22,11 +22,15 @@
 	},
 	"rules": {
 		"space-before-function-paren": [1, "always"],
+		"react/jsx-curly-spacing": [1, "never"],
+		"react/jsx-max-props-per-line": [1, { "maximum": 4 }],
+		"react/jsx-no-duplicate-props": 1,
 		"react/jsx-no-undef": 2,
 		"react/jsx-sort-prop-types": 1,
 		"react/jsx-sort-props": 1,
 		"react/jsx-uses-react": 1,
 		"react/jsx-uses-vars": 1,
+		"react/prop-types": 1,
 		"react/react-in-jsx-scope": 2
 	}
 }

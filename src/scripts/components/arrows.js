@@ -16,8 +16,8 @@ export default class Arrows extends Component {
 		if (!grandParentState || parentState === grandParentState) {
 			return (
 				<div className="step-arrows">
-					<div className="step-arrow fulfilled">{ parentState === "fulfilled" ? "⬇" : ""}</div>
-					<div className="step-arrow rejected">{ parentState === "rejected" ? "⬇" : ""}</div>
+					<div className="step-arrow fulfilled">{parentState === "fulfilled" ? "⬇" : ""}</div>
+					<div className="step-arrow rejected">{parentState === "rejected" ? "⬇" : ""}</div>
 				</div>
 			);
 		}

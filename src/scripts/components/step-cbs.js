@@ -46,7 +46,8 @@ OnFulfilled.propTypes = OnRejected.propTypes = {
 	body: PropTypes.string.isRequired,
 	disabled: PropTypes.bool.isRequired,
 	index: PropTypes.number.isRequired,
-	notCalled: PropTypes.bool.isRequired
+	notCalled: PropTypes.bool.isRequired,
+	onChange: PropTypes.func.isRequired
 };
 
 // Cbs = Callbacks

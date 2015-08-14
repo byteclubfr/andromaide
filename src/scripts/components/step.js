@@ -65,7 +65,13 @@ export default class Step extends Component {
 						parentStepPromiseState={parentStep.promise.state}
 						promise={promise}
 					/>
-					<Cbs actions={actions} cbs={cbs} index={index} parentStepPromiseState={parentStep.promise.state} ui={ui} />
+					<Cbs
+						actions={actions}
+						cbs={cbs}
+						index={index}
+						parentStepPromiseState={parentStep.promise.state}
+						ui={ui}
+					/>
 					<div className="step-method-end"><strong>){ui.intermediatePromises ? ";" : ""}</strong></div>
 				</li>
 		);
