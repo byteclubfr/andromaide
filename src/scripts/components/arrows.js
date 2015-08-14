@@ -9,11 +9,10 @@ class ArrowValue extends Component {
 
 	render () {
 		const { value } = this.props;
-		let v = value.toString();
-		v = typeof value == "string" ? "'" + value.toString() + "'" : v;
+		let v = typeof value == "object" && value.message ? value.message : value;
 
 		return (
-			<div className="step-arrow-value">{v}</div>
+			<div className="step-arrow-value">{JSON.stringify(v)}</div>
 		);
 	}
 }
