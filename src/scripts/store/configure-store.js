@@ -9,12 +9,31 @@ import settledPromise from "../middlewares/settled-promise";
 import * as reducers from "../reducers";
 
 // persistence
+
+// TODO split reducers
+function persistentSlicer () {
+	return (state) => {
+		return {
+			...state,
+			steps: state.steps.map(step => {
+				return {
+					...step,
+					promise: {
+						state: "pending"
+					}
+				}
+			})
+		};
+	}
+}
+
 const createPersistentStore = compose(
-	persistState("ui"),
+	persistState(["ui", "steps"], { slicer: persistentSlicer }),
 	createStore
 );
 
 // middlewares
+
 const createStoreWithMiddleware = applyMiddleware(
 	settledPromise,
 	logger
