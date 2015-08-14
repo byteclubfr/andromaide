@@ -7,7 +7,7 @@ export default class SourceButtons extends Component {
 		disabled: PropTypes.bool.isRequired,
 		fulfill: PropTypes.func.isRequired,
 		initValue: PropTypes.string.isRequired,
-		reject: PropTypes.func.isRequred
+		reject: PropTypes.func.isRequired
 	}
 
 	handleFulfill () {
