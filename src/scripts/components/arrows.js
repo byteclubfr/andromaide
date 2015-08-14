@@ -35,11 +35,11 @@ export default class Arrows extends Component {
 			return (
 				<div className="step-arrows">
 					<div className="step-arrow fulfilled">
-						<ArrowValue value={parentState === "fulfilled" ? parentStep.promise.value : ""} />
+						<ArrowValue value={parentState === "fulfilled" ? parentStep.promise.value : undefined} />
 						<div className="step-arrow-icon">{parentState === "fulfilled" ? "⬇" : ""}</div>
 					</div>
 					<div className="step-arrow rejected">
-						<ArrowValue value={parentState === "rejected" ? parentStep.promise.value : ""} />
+						<ArrowValue value={parentState === "rejected" ? parentStep.promise.value : undefined} />
 						<div className="step-arrow-icon">{parentState === "rejected" ? "⬇" : ""}</div>
 					</div>
 				</div>
