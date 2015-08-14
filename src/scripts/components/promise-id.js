@@ -4,7 +4,7 @@ import React, { Component, PropTypes } from "react";
 
 export default class PromiseId extends Component {
 	static propTypes = {
-		id: PropTypes.number.isRequired,
+		id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 		promiseState: PropTypes.string.isRequired
 	}
 
@@ -12,7 +12,7 @@ export default class PromiseId extends Component {
 		const { id, promiseState } = this.props;
 
 		return (
-				<span className={"promise-id " + promiseState}>promise{id}</span>
+			<span className={"promise-id " + promiseState}>promise{id}</span>
 		);
 	}
 }

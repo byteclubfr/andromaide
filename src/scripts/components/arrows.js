@@ -12,6 +12,8 @@ export default class Arrows extends Component {
 		const grandParentState = parentStep.parentStepPromiseState;
 		const parentState = parentStep.promise.state;
 
+		if (parentState === "pending") return <div />;
+
 		// vertical arrows
 		if (!grandParentState || parentState === grandParentState) {
 			return (
@@ -24,20 +26,19 @@ export default class Arrows extends Component {
 
 		// diagonal arrows
 
-		if (grandParentState === "fulfilled" && parentState !== "pending") {
+		if (grandParentState === "fulfilled") {
 			return (
 				<div className="step-arrows">
 					<div className="step-arrow-diagonal rejected">⬊</div>
 				</div>
 			);
 		}
-		if (grandParentState === "rejected" && parentState !== "pending") {
+		if (grandParentState === "rejected") {
 			return (
 				<div className="step-arrows">
 					<div className="step-arrow-diagonal fulfilled">⬋</div>
 				</div>
 			);
 		}
-		return <div />;
 	}
 }

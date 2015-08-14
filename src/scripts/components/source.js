@@ -40,9 +40,9 @@ function executor (resolve, reject) {
 
 		if (ui.intermediatePromises) {
 			assign = [
-				<span>var </span>,
-				<PromiseId id="Source" promiseState={step.promise.state} />,
-				<span> = new Promise(executor);</span>
+				<span key="declaration-type">var </span>,
+				<PromiseId id="Source" key="id" promiseState={step.promise.state} />,
+				<span key="declaration-init"> = new Promise(executor);</span>
 			];
 		} else {
 			assign = "(new Promise(executor))";

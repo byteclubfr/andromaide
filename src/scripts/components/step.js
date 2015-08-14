@@ -23,10 +23,10 @@ class Method extends Component {
 		var assign;
 		if (intermediatePromises) {
 			assign = [
-				<span>var </span>,
-				<PromiseId id={index} promiseState={promise.state} />,
-				<span> = </span>,
-				<PromiseId id={parentStepIndex} promiseState={parentStepPromiseState} />
+				<span key="declaration-type">var </span>,
+				<PromiseId id={index} key="id" promiseState={promise.state} />,
+				<span key="op"> = </span>,
+				<PromiseId id={parentStepIndex} key="declaration-init" promiseState={parentStepPromiseState} />
 			];
 		}
 
