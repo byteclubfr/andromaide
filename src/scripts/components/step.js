@@ -35,7 +35,7 @@ const stepDropTarget = {
 	isDragging: monitor.isDragging()
 }))
 @DropTarget(STEP, stepDropTarget, connect => ({
-  connectDropTarget: connect.dropTarget()
+	connectDropTarget: connect.dropTarget()
 }))
 export default class Step extends Component {
 	static propTypes = {

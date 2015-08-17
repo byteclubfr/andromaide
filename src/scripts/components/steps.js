@@ -13,21 +13,23 @@ export default class Steps extends Component {
 
 	render () {
 		const { actions, steps, ui } = this.props;
+		let stepComps = tail(steps).map((step, i) =>
+			<Step
+				actions={actions}
+				index={i + 1}
+				key={i + 1}
+				parentStep={steps[i]}
+				step={step}
+				ui={ui}
+			/>
+		);
+		if (!stepComps.length) {
+			stepComps = <div className="no-steps">No steps yet!</div>;
+		}
 
 		// tail removes the source (step[0])
 		return (
-			<ul className="steps">
-				{tail(steps).map((step, i) =>
-					<Step
-						actions={actions}
-						index={i + 1}
-						key={i + 1}
-						parentStep={steps[i]}
-						step={step}
-						ui={ui}
-					/>
-				)}
-			</ul>
+			<ul className="steps">{stepComps}</ul>
 		);
 	}
 }
