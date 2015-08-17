@@ -1,0 +1,180 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  background: #fff;
+  color: #333;
+  font-family: sans-serif;
+  margin: 0 auto;
+  width: 60%;
+}
+h1,
+h2 {
+  font-weight: normal;
+}
+footer {
+  color: #666;
+  font-size: 0.8em;
+  padding: 2em;
+  text-align: center;
+}
+footer a {
+  color: #666;
+}
+button {
+  background: #ddd;
+  border: 0;
+  border-radius: 2px;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.2), 0 1px 5px 0 rgba(0,0,0,0.12);
+  cursor: pointer;
+  padding: 0.5em;
+}
+button:hover {
+  background: #ccc;
+}
+button:disabled {
+  color: #999;
+  cursor: not-allowed;
+}
+textarea {
+  border: 1px solid #666;
+  display: block;
+  height: 3em;
+  width: 100%;
+}
+.options-toggle {
+  float: right;
+  margin-left: 1em;
+}
+.options {
+  background: #bde5f8;
+  border-bottom: 1px solid #666;
+  margin-bottom: 2em;
+  padding-bottom: 2em;
+}
+.source {
+  background: #f3f3f3;
+  margin: 1em 0;
+}
+.source-title {
+  color: #888;
+  font-size: 1.4em;
+  text-align: right;
+}
+.source > span {
+  margin: 0 1em;
+}
+.source-init-value {
+  clear: both;
+  text-align: center;
+}
+.source-snippet {
+  margin: 0 auto;
+  width: 50%;
+}
+.source-assign {
+  text-align: center;
+}
+.source-buttons {
+  margin: 1em 0;
+}
+.steps {
+  list-style: none;
+  padding: 0;
+}
+.step {
+  background: #f3f3f3;
+  margin: 1em 0;
+}
+.step:hover {
+  background: #eee;
+}
+.step-arrows {
+  display: flex;
+}
+.step-arrow-icon {
+  font-size: 3em;
+  font-weight: bold;
+}
+.step-arrow,
+.step-arrow-diagonal {
+  text-align: center;
+  width: 50%;
+}
+.step-arrow {
+  width: 50%;
+}
+.step-arrow-diagonal {
+  width: 100%;
+}
+.step-remove {
+  float: right;
+  height: 2em;
+  margin-left: 1em;
+  width: 2em;
+}
+.step-title {
+  color: #888;
+  cursor: move;
+  font-size: 1.4em;
+  text-align: right;
+}
+.step-method,
+.step-method-end {
+  text-align: center;
+}
+.step-cbs {
+  display: flex;
+}
+.step-cb {
+  width: 48%;
+}
+.step-cb.on-fulfilled {
+  margin-right: 2%;
+}
+.step-cb.on-rejected {
+  margin-left: 2%;
+}
+.step-catch .step-cb {
+  margin-left: 52%;
+}
+.not-called {
+  opacity: 0.3;
+}
+.pending {
+  background: #feefb3;
+  color: #9f6000;
+}
+.fulfill,
+.fulfilled,
+.on-fulfilled,
+.add-then1 {
+  color: #4f8a10;
+}
+.reject,
+.rejected,
+.on-rejected,
+.add-catch {
+  color: #d8000c;
+}
+.step-add-buttons {
+  display: flex;
+  flex-wrap: wrap;
+}
+.fulfill,
+.add-then1 {
+  margin-right: 2%;
+  width: 48%;
+}
+.reject,
+.add-catch {
+  margin-left: 2%;
+  width: 48%;
+}
+.add-then2 {
+  margin-bottom: 1em;
+  width: 100%;
+}
+.hidden {
+  display: none;
+}
