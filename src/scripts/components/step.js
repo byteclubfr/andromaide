@@ -60,8 +60,9 @@ const stepDropTarget = {
 };
 
 @DragSource(STEP, stepDragSource, (connect, monitor) => ({
-  connectDragSource: connect.dragSource(),
-  isDragging: monitor.isDragging()
+	connectDragPreview: connect.dragPreview(),
+	connectDragSource: connect.dragSource(),
+	isDragging: monitor.isDragging()
 }))
 @DropTarget(STEP, stepDropTarget, connect => ({
   connectDropTarget: connect.dropTarget()
@@ -85,30 +86,30 @@ export default class Step extends Component {
 
 	render () {
 		const { actions, index, parentStep, step: { method, cbs, promise }, ui } = this.props;
-		const { connectDragSource, connectDropTarget, isDragging } = this.props;
-		const opacity = isDragging ? 0 : 1;
+		const { connectDragSource, connectDropTarget, connectDragPreview, isDragging } = this.props;
+		const opacity = isDragging ? 0.2 : 1;
 
-		return connectDragSource(connectDropTarget(
-				<li className={"step step-" + method} style={{opacity: opacity}}>
-					<button className="step-remove" disabled={promise.state !== "pending"} onClick={::this.handleRemove} title="Remove this step">×</button>
-					<div className="step-title">Step {index}</div>
-					<Arrows parentStep={parentStep} />
-					<Method
-						index={index}
-						intermediatePromises={ui.intermediatePromises}
-						method={method}
-						parentStepPromiseState={parentStep.promise.state}
-						promise={promise}
-					/>
-					<Cbs
-						actions={actions}
-						cbs={cbs}
-						index={index}
-						parentStepPromiseState={parentStep.promise.state}
-						ui={ui}
-					/>
-					<div className="step-method-end"><strong>){ui.intermediatePromises ? ";" : ""}</strong></div>
-				</li>
+		return connectDragPreview(connectDropTarget(
+			<li className={"step step-" + method} style={{opacity: opacity}}>
+				<button className="step-remove" disabled={promise.state !== "pending"} onClick={::this.handleRemove} title="Remove this step">×</button>
+				{connectDragSource(<div className="step-title">Step {index}</div>)}
+				<Arrows parentStep={parentStep} />
+				<Method
+					index={index}
+					intermediatePromises={ui.intermediatePromises}
+					method={method}
+					parentStepPromiseState={parentStep.promise.state}
+					promise={promise}
+				/>
+				<Cbs
+					actions={actions}
+					cbs={cbs}
+					index={index}
+					parentStepPromiseState={parentStep.promise.state}
+					ui={ui}
+				/>
+				<div className="step-method-end"><strong>){ui.intermediatePromises ? ";" : ""}</strong></div>
+			</li>
 		));
 	}
 }
