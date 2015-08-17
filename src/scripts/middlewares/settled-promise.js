@@ -21,7 +21,7 @@ export default store => next => action => {
 
 		function executor (resolve, reject) {
 			setTimeout(function () {
-				if (data.result) {
+				if (data.hasOwnProperty("result")) {
 					resolve(data.result)
 				} else {
 					reject(data.error);
