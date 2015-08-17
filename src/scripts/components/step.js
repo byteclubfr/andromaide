@@ -1,6 +1,9 @@
 "use strict";
 
 import React, { Component, PropTypes } from "react";
+import { DragSource, DropTarget } from 'react-dnd';
+
+import { STEP } from "../constants/dnd-types";
 
 import Arrows from "./arrows";
 import Cbs from "./step-cbs";
@@ -36,10 +39,40 @@ class Method extends Component {
 	}
 }
 
+// dnd spec
+const stepDragSource = {
+	// return the data describing the dragged item
+	beginDrag (props) {
+		return { index: props.index };
+	},
+
+	endDrag (props, monitor) {
+		if (monitor.didDrop()) {
+			props.actions.moveStep(monitor.getItem().index, monitor.getDropResult().index);
+		}
+	}
+};
+
+const stepDropTarget = {
+	drop (props) {
+		return { index: props.index };
+	}
+};
+
+@DragSource(STEP, stepDragSource, (connect, monitor) => ({
+  connectDragSource: connect.dragSource(),
+  isDragging: monitor.isDragging()
+}))
+@DropTarget(STEP, stepDropTarget, connect => ({
+  connectDropTarget: connect.dropTarget()
+}))
 export default class Step extends Component {
 	static propTypes = {
 		actions: PropTypes.object.isRequired,
+		connectDragSource: PropTypes.func.isRequired,
+		connectDropTarget: PropTypes.func.isRequired,
 		index: PropTypes.number.isRequired,
+		isDragging: PropTypes.bool.isRequired,
 		parentStep: PropTypes.object.isRequired,
 		step: PropTypes.object.isRequired,
 		ui: PropTypes.object.isRequired
@@ -52,9 +85,11 @@ export default class Step extends Component {
 
 	render () {
 		const { actions, index, parentStep, step: { method, cbs, promise }, ui } = this.props;
+		const { connectDragSource, connectDropTarget, isDragging } = this.props;
+		const opacity = isDragging ? 0 : 1;
 
-		return (
-				<li className={"step step-" + method}>
+		return connectDragSource(connectDropTarget(
+				<li className={"step step-" + method} style={{opacity: opacity}}>
 					<button className="step-remove" disabled={promise.state !== "pending"} onClick={::this.handleRemove} title="Remove this step">×</button>
 					<div className="step-title">Step {index}</div>
 					<Arrows parentStep={parentStep} />
@@ -74,7 +109,7 @@ export default class Step extends Component {
 					/>
 					<div className="step-method-end"><strong>){ui.intermediatePromises ? ";" : ""}</strong></div>
 				</li>
-		);
+		));
 	}
 }
 

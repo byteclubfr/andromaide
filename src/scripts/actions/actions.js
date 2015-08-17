@@ -95,6 +95,14 @@ export function addCatch () {
 	};
 }
 
+export function moveStep (draggedIndex, dropTargetIndex) {
+	return {
+		type: types.MOVE_STEP,
+		draggedIndex,
+		dropTargetIndex
+	};
+}
+
 export function removeStep (index) {
 	return {
 		type: types.REMOVE_STEP,

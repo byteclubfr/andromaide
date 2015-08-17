@@ -1,5 +1,6 @@
+import update from "react/lib/update";
 import {
-	ADD_THEN1, ADD_THEN2, ADD_CATCH, REMOVE_STEP,
+	ADD_THEN1, ADD_THEN2, ADD_CATCH, MOVE_STEP, REMOVE_STEP,
 	CHANGE_INIT_VALUE, FULFILL, REJECT,
 	CHANGE_ON_FULFILLED_BODY, CHANGE_ON_REJECTED_BODY
 } from "../constants/action-types";
@@ -47,6 +48,16 @@ export default function steps (state = initialState, action) {
 				cbs: action.cbs
 			}
 		];
+
+	case MOVE_STEP:
+		let step = state[action.draggedIndex];
+		// https://facebook.github.io/react/docs/update.html
+		return update(state, {
+			$splice: [
+				[action.draggedIndex, 1],
+				[action.dropTargetIndex, 0, step]
+			]
+		});
 
 	case REMOVE_STEP:
 		return state.filter((step, index) => index !== action.index);

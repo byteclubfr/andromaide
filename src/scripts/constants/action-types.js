@@ -19,6 +19,7 @@ export const REJECT = "REJECT";
 export const ADD_CATCH = "ADD_CATCH";
 export const ADD_THEN1 = "ADD_THEN1";
 export const ADD_THEN2 = "ADD_THEN2";
+export const MOVE_STEP = "MOVE_STEP";
 export const REMOVE_STEP = "REMOVE_STEP";
 
 // steps callbacks
