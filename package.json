@@ -5,7 +5,7 @@
   "main": "bundle.js",
   "scripts": {
     "build": "mkdir -p dist && npm run components && npm run styles && npm run html",
-    "components": "browserify src/scripts/index.js --debug -t [babelify --stage 0] --outfile dist/bundle.js",
+    "components": "browserify src/scripts/index.js -t [babelify --stage 0] -t uglifyify --outfile dist/bundle.js",
     "deploy": "gh-pages-deploy",
     "html": "cp src/index.html dist",
     "livereactload": "livereactload monitor -n dist/bundle.js",
@@ -62,6 +62,7 @@
     "gh-pages-deploy": "^0.3.0",
     "livereactload": "^0.6.0",
     "stylus": "^0.52.0",
+    "uglifyify": "^3.0.1",
     "watchify": "^3.3.1"
   },
   "gh-pages-deploy": {
