@@ -106,7 +106,7 @@ export function moveStep (draggedIndex, dropTargetIndex) {
 export function removeStep (index) {
 	return {
 		type: types.REMOVE_STEP,
-		index: index
+		index
 	};
 }
 

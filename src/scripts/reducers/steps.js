@@ -63,7 +63,7 @@ export default function steps (state = initialState, action) {
 		return state.filter((step, index) => index !== action.index);
 
 	case CHANGE_INIT_VALUE:
-		return state.map(function (step, index) {
+		return state.map((step, index) => {
 			// source
 			if (index === 0) {
 				return {
@@ -77,7 +77,7 @@ export default function steps (state = initialState, action) {
 	case FULFILL:
 		if (!action.settled) return state;
 
-		return state.map(function (step, index) {
+		return state.map((step, index) => {
 			if (index === action.stepIndex) {
 				return {
 					...step,
@@ -100,7 +100,7 @@ export default function steps (state = initialState, action) {
 	case REJECT:
 		if (!action.settled) return state;
 
-		return state.map(function (step, index) {
+		return state.map((step, index) => {
 			if (index === action.stepIndex) {
 				return {
 					...step,
@@ -121,7 +121,7 @@ export default function steps (state = initialState, action) {
 		});
 
 	case CHANGE_ON_FULFILLED_BODY:
-		return state.map(function (step, index) {
+		return state.map((step, index) => {
 			if (index === action.index) {
 				return {
 					...step,
@@ -135,7 +135,7 @@ export default function steps (state = initialState, action) {
 		});
 
 	case CHANGE_ON_REJECTED_BODY:
-		return state.map(function (step, index) {
+		return state.map((step, index) => {
 			if (index === action.index) {
 				return {
 					...step,

@@ -20,7 +20,7 @@ export default store => next => action => {
 		var fns = getCbsFns(buildCbsFns(nextStep.cbs));
 
 		function executor (resolve, reject) {
-			setTimeout(function () {
+			setTimeout(() => {
 				if (data.hasOwnProperty("result")) {
 					resolve(data.result)
 				} else {
@@ -60,7 +60,7 @@ export default store => next => action => {
 };
 
 function buildCbsFns (cbs) {
-	return cbs.map(function (cb) {
+	return cbs.map((cb) => {
 		var arg = cb.type === "fulfilled" ? "data" : "err";
 		return {
 			...cb,

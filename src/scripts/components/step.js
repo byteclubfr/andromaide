@@ -58,7 +58,7 @@ export default class Step extends Component {
 		const opacity = isDragging ? 0.2 : 1;
 
 		return connectDragPreview(connectDropTarget(
-			<li className={"step step-" + method} style={{opacity: opacity}}>
+			<li className={"step step-" + method} style={{opacity}}>
 				<button className="step-remove" disabled={promise.state !== "pending"} onClick={::this.handleRemove} title="Remove this step">×</button>
 				{connectDragSource(<div className="step-title">Step {index}</div>)}
 				<Arrows parentStep={parentStep} />

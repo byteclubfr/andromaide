@@ -21,6 +21,8 @@
 		"spread": true
 	},
 	"rules": {
+		"object-shorthand": 1,
+		"prefer-arrow-callback": 1,
 		"space-before-function-paren": [1, "always"],
 		"react/jsx-curly-spacing": [1, "never"],
 		"react/jsx-max-props-per-line": [1, { "maximum": 4 }],
