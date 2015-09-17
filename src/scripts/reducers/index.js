@@ -1,5 +1,3 @@
-"use strict";
-
 import steps from "./steps";
 import ui from "./ui";
 

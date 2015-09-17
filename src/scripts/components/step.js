@@ -1,5 +1,3 @@
-"use strict";
-
 import React, { Component, PropTypes } from "react";
 import { DragSource, DropTarget } from 'react-dnd';
 

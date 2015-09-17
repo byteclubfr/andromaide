@@ -1,5 +1,3 @@
-"use strict";
-
 import { tail } from "lodash";
 import React, { Component, PropTypes } from "react";
 import Step from "./step";

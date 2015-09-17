@@ -1,5 +1,3 @@
-"use strict";
-
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import persistState from "redux-localstorage";
 

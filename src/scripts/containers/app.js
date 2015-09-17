@@ -1,5 +1,3 @@
-"use strict";
-
 // React needs to be included for all components for JSX desuggaring
 import React, { Component } from "react";
 import { Provider } from "react-redux";
