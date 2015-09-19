@@ -26,9 +26,8 @@ function persistentSlicer () {
 }
 
 const createPersistentStore = compose(
-	persistState(["ui", "steps"], { slicer: persistentSlicer }),
-	createStore
-);
+	persistState(["ui", "steps"], { slicer: persistentSlicer })
+)(createStore);
 
 // middlewares
 

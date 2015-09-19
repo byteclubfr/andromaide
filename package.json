@@ -49,8 +49,8 @@
     "lodash": "^3.10.1",
     "react": "^0.13.3",
     "react-dnd": "^1.1.4",
-    "react-redux": "^0.8.2",
-    "redux": "^1.0.0-rc",
+    "react-redux": "^2.0.0",
+    "redux": "^3.0.0",
     "redux-localstorage": "^0.4.0"
   },
   "devDependencies": {
