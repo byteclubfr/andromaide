@@ -70,8 +70,8 @@ function buildCbsFns (cbs) {
 }
 
 function getCbsFns (cbs) {
-	let onFulfilled = cbs.filter(cb => cb.type === "fulfilled")[0];
-	let onRejected = cbs.filter(cb => cb.type === "rejected")[0];
+	let onFulfilled = cbs.find(cb => cb.type === "fulfilled")
+	let onRejected = cbs.find(cb => cb.type === "rejected")
 	return {
 		onFulfilled: onFulfilled ? onFulfilled.fn : null,
 		onRejected: onRejected ? onRejected.fn : null
