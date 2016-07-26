@@ -42,7 +42,7 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "https://github.com/lmtm/andromaide.git"
+    "url": "https://github.com/byteclubfr/andromaide.git"
   },
   "dependencies": {
     "classnames": "^2.1.3",
