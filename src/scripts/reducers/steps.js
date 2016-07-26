@@ -49,7 +49,7 @@ export default function steps (state = initialState, action) {
 			}
 		];
 
-	case MOVE_STEP:
+	case MOVE_STEP: {
 		let step = state[action.draggedIndex];
 		// https://facebook.github.io/react/docs/update.html
 		return update(state, {
@@ -58,6 +58,7 @@ export default function steps (state = initialState, action) {
 				[action.dropTargetIndex, 0, step]
 			]
 		});
+	}
 
 	case REMOVE_STEP:
 		return state.filter((step, index) => index !== action.index);

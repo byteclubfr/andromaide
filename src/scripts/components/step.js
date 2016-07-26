@@ -38,6 +38,7 @@ const stepDropTarget = {
 export default class Step extends Component {
 	static propTypes = {
 		actions: PropTypes.object.isRequired,
+		connectDragPreview: PropTypes.func.isRequired,
 		connectDragSource: PropTypes.func.isRequired,
 		connectDropTarget: PropTypes.func.isRequired,
 		index: PropTypes.number.isRequired,
